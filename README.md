@@ -4,7 +4,9 @@
   </a>
   <br/>
   
-Η εφαρμογή Μνησίας για επισκέπτες Μουσείου, έκδοση για συσκευές. Μπορείτε να τις επισκεφθείτε στους συνδέσμους android: και iOS:
+Η εφαρμογή Μνησίας για επισκέπτες Μουσείου, έκδοση για συσκευές. Μπορείτε να τις επισκεφθείτε στους συνδέσμους Google Play: https://play.google.com/store/apps/details?id=net.Diadrasis.Mnesias και App Store: https://apps.apple.com/mn/app/mnesias/id1581985334
+
+Προτείνεται σε tablet για καλύτερη πλοήγηση στην εφαρμογή. 
 
 ## Privacy Policy
   
