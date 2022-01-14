@@ -4,9 +4,9 @@
   </a>
   <br/>
   
-Η εφαρμογή Μνησίας για επισκέπτες Μουσείου, έκδοση για συσκευές. Μπορείτε να τις επισκεφθείτε στους συνδέσμους Google Play: https://play.google.com/store/apps/details?id=net.Diadrasis.Mnesias και App Store: https://apps.apple.com/mn/app/mnesias/id1581985334
+Η εφαρμογή Μνησίας για επισκέπτες Μουσείου, έκδοση για συσκευές. Σκοπός του έργου ΜΝΗΣΙΑΣ είναι οι επισκέπτες των μουσείων να δουν σε πραγματικό χρόνο και να ακούσουν τους ήχους που παράγονται ανάλογα με το έκθεμα που έχουν μπροστά τους και να τους ταξιδέψει στην εποχή τους. Μπορείτε να τις επισκεφθείτε στους συνδέσμους <a href="https://play.google.com/store/apps/details?id=net.Diadrasis.Mnesias" target="_blank">Google Play</a>  και <a href="https://apps.apple.com/mn/app/mnesias/id1581985334" target="_blank">App Store</a> 
 
-Προτείνεται σε tablet για καλύτερη πλοήγηση στην εφαρμογή. 
+Προτείνεται η εγκατάσταση της εφαρμογής να γίνει σε tablet για καλύτερη πλοήγηση στην εφαρμογή. 
 
 ## Privacy Policy
   
