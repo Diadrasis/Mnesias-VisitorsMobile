@@ -15,7 +15,6 @@ public class MobileScript : MonoBehaviour
     public Image imgHelys;
     public Button btnPlayPanel;
     public Button btnClosePlayPanel;
-    public Button btnQuit;
     public TextMeshProUGUI txtTitleInstrument;
     
 }

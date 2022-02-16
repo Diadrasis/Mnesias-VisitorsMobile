@@ -184,9 +184,7 @@ public class MainPCManager : MonoBehaviour
         ms.txtTitleInstrument.gameObject.SetActive(false);
 
 #endif
-#if PLATFORM_IOS
-        ms.btnQuit.gameObject.SetActive(false);
-#endif
+
     }
 
 
