@@ -174,6 +174,7 @@ public class StringManager : MonoBehaviour
         CloseListOfGameObjectsTrigono();
         mpm.pnlBottom.SetActive(false);
         if (mpm.pnlExtraMenu.activeSelf) mpm.CloseMenuPanel();
+        OnResetString();
     }
 
     #endregion
@@ -480,7 +481,8 @@ public class StringManager : MonoBehaviour
     {
         Debug.Log("String submit");
         mpm.ButtonsWhenSubmitOrReset();
-       
+
+       //set1 on length trigono
         if (togglesLengthInput[0].isOn && mpm.isTrigono)
         {
             rowS.folderS = grid[54][7];
@@ -491,6 +493,7 @@ public class StringManager : MonoBehaviour
                 lengthInputs[i+26].gameObject.SetActive(false);
             }
         }
+        //set2 on length trigono
         else if (togglesLengthInput[1].isOn && mpm.isTrigono)
         {
             rowS.folderS = grid[80][7];
@@ -501,7 +504,8 @@ public class StringManager : MonoBehaviour
                 lengthInputs[i].gameObject.SetActive(false);
             }
         }
-        else if(togglesLengthInput[0].isOn && mpm.isLyra)
+        //set1 on length lyra
+        else if (togglesLengthInput[0].isOn && mpm.isLyra)
         {
             rowS.folderS = grid[221][7];
             mpm.myAudio.LoadAudio(rowS.folderS + "/");
@@ -512,6 +516,7 @@ public class StringManager : MonoBehaviour
             }
             Debug.Log("Lyra length set 1");
         }
+        //set2 on length lyra
         else if (togglesLengthInput[1].isOn && mpm.isLyra)
         {
             rowS.folderS = grid[231][7];

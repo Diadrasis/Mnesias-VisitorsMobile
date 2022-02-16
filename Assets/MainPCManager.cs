@@ -184,7 +184,9 @@ public class MainPCManager : MonoBehaviour
         ms.txtTitleInstrument.gameObject.SetActive(false);
 
 #endif
-
+#if PLATFORM_IOS
+        ms.btnQuit.gameObject.SetActive(false);
+#endif
     }
 
 
@@ -201,7 +203,7 @@ public class MainPCManager : MonoBehaviour
 
     }
 
-    #endregion
+#endregion
 
     //to assign most buttons of the project
     void SubscribedButtons()
@@ -237,7 +239,7 @@ public class MainPCManager : MonoBehaviour
 #endif
     }
 
-    #region Panels
+#region Panels
 
     //main wind scene where player can change values in order to listen to the correct sounds
     public void OpenAulosMainScene()
