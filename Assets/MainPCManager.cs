@@ -109,10 +109,12 @@ public class MainPCManager : MonoBehaviour
     public GameObject[] textureVideos;
     public GameObject pnlMainRawVideo;
     public Button btnCloseVideo;
-
+    public Slider slVideo;
     public DatabaseAudio myAudio;//for audio
     public ButtonLevel buttonLevel;//to load levels, close application etc.
-
+    public Button btnVideo;
+    public Sprite btnPlaySp;
+    public Sprite btnPauseSp;
     [HideInInspector] public bool isMegarwnH64, isMegarwnL64, isDafnis, isMegarwnL65, isMegarwnH65, isTrigono, isLyra; //to check on which instrument we are in and open/close panels, methods etc.
 
     [HideInInspector] public bool isPiraeus, isMegara;//for the window name change
@@ -245,7 +247,7 @@ public class MainPCManager : MonoBehaviour
         //btnBackToMain.gameObject.SetActive(true);
         btnExtraMenu.gameObject.SetActive(true);
         separate.SetActive(true);
-        btn3DScene.gameObject.SetActive(true);
+        
         ClosedPanelsGO(false, false, false, false, false, false);
         pnlWindScreen.SetActive(true);
         pnlStringScreen.SetActive(false);
@@ -254,7 +256,7 @@ public class MainPCManager : MonoBehaviour
         imgMnesiasBack.gameObject.SetActive(true);
         wm.isBack = false;
 
-        btn3DScene.gameObject.SetActive(true);
+        //btn3DScene.gameObject.SetActive(true);
         btn3DScene.onClick.RemoveAllListeners();
 
         if (isDafnis && !(isMegarwnH64 || isMegarwnL64 || isMegarwnH65 || isMegarwnL65))
@@ -262,10 +264,7 @@ public class MainPCManager : MonoBehaviour
             txtInstrument.gameObject.SetActive(true);
             txtInstrument.text = "> " + btnAulosDafnis.GetComponentInChildren<TextMeshProUGUI>().text;
             wm.btnBarrytone.interactable = false;
-            btn3DScene.onClick.AddListener(() => wm.Load3DIns(windInsDafnis3D));
-            windInsDafnis3D.SetActive(true);
-            windInsMeg643D.SetActive(false);
-            windInsMeg653D.SetActive(false);
+            
 
 #if PLATFORM_ANDROID || PLATFORM_IOS
             ms.imgMegarwn64.gameObject.SetActive(false);
@@ -290,10 +289,7 @@ public class MainPCManager : MonoBehaviour
             txtInstrument.gameObject.SetActive(true);
             txtInstrument.text = "> " + btnAulosMegara64.GetComponentInChildren<TextMeshProUGUI>().text;
             wm.btnBarrytone.interactable = true;
-            btn3DScene.onClick.AddListener(() => wm.Load3DIns(windInsMeg643D));
-            windInsMeg643D.SetActive(true);
-            windInsMeg653D.SetActive(false);
-            windInsDafnis3D.SetActive(false);
+            
 
 #if PLATFORM_ANDROID || PLATFORM_IOS
             ms.imgMegarwn64.gameObject.SetActive(true);
@@ -316,10 +312,7 @@ public class MainPCManager : MonoBehaviour
             txtInstrument.gameObject.SetActive(true);
             txtInstrument.text = "> " + btnAulosMegara65.GetComponentInChildren<TextMeshProUGUI>().text;
             wm.btnBarrytone.interactable = true;
-            btn3DScene.onClick.AddListener(() => wm.Load3DIns(windInsMeg653D));
-            windInsMeg643D.SetActive(false);
-            windInsDafnis3D.SetActive(false);
-            windInsMeg653D.SetActive(true);
+            
 #if PLATFORM_ANDROID || PLATFORM_IOS
             ms.imgMegarwn64.gameObject.SetActive(false);
             ms.imgMegarwn65.gameObject.SetActive(true);
@@ -333,12 +326,10 @@ public class MainPCManager : MonoBehaviour
 
         btnSubmit.onClick.AddListener(wm.OnSubmit);
         btnChangeValue.onClick.AddListener(wm.OpenChangeValuesPanel);
-
-
-        if (pnlHelp.activeSelf) CloseHelpPanel();
-
         trigonoIns3D.SetActive(false);
         LyraIns3D.SetActive(false);
+
+        if (pnlHelp.activeSelf) CloseHelpPanel();
 
         btnReset.onClick.AddListener(wm.OnReset);
 #if PLATFORM_ANDROID || PLATFORM_IOS
@@ -1172,7 +1163,7 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
     {
         btnSubmit.gameObject.SetActive(false);
         btnReset.gameObject.SetActive(false);
-        btn3DScene.gameObject.SetActive(true);
+        
         btnMoreInfo.gameObject.SetActive(true);
 
     }
@@ -1207,8 +1198,6 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
     void LoadMuseumVideos(string aVideo,string bVideo)
     {
         
-
-
         for (int i = 0; i < textureVideos.Length; i++)
         {
 
@@ -1247,9 +1236,6 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
             }
             videoPlayer.time = 0;
         }
-
-
-
         //Debug.Log("Second for " + nameNoextension+ " 1st button " + textureVideos[0].GetComponentInChildren<TextMeshProUGUI>().text+" 2nd btn: "+ textureVideos[1].GetComponentInChildren<TextMeshProUGUI>().text);
 
     }
@@ -1262,20 +1248,23 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
         videoPlayer.clip = videoClip[num];
 
         pnlMainRawVideo.SetActive(true);
+        
         if (videoPlayer.isPlaying)
         {
             videoPlayer.Pause();
+           
         }
         else
         {
             videoPlayer.Play();
+          
         }
         Debug.Log("Num: " + num);
 
     }
 #endif
 
-    //on webgl we can't use the previosu method, cause we want to access the url. This method is assigned on each buttn from code.
+    //on webgl we can't use the previous method, cause we want to access the url. This method is assigned on each buttn from code.
 #if PLATFORM_WEBGL
     public void PlayVideoWeb(string url)
     {
@@ -1308,7 +1297,7 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
     }
 #endif
 
-    //this method works only on video, when we tap on ti to pause or play the video.
+    //this method works only on video, when we tap on it to pause or play the video.
     public void PlayPauseVideo()
     {
         if (videoPlayer.isPlaying)
@@ -1320,7 +1309,21 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
             videoPlayer.Play();
         }
     }
-
+    private void Update()
+    {
+        if (videoPlayer.isPlaying)
+        {
+            slVideo.value = (float)videoPlayer.frame / (float)videoPlayer.clip.frameCount;
+            btnVideo.gameObject.GetComponent<Image>().sprite = btnPauseSp;
+        }
+        else
+        {
+            btnVideo.gameObject.GetComponent<Image>().sprite = btnPlaySp;
+        }
+       
+    }
+    
+   
 #endregion
 
 

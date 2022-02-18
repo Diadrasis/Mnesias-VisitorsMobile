@@ -153,7 +153,7 @@ public class WindManager : MonoBehaviour
     //here we check how to configure each specific group values and how to load them on each occation. Is used as many times as we have combinations that provide us with sounds.
     void OpenValues(int num)
     {
-        for (int i = 1; i < grid.Length; i++)
+        for (int i = num; i < grid.Length; i++)
         {
             row.mouthpiece = grid[i][0];
             row.boreLength = grid[i][1];
@@ -167,10 +167,10 @@ public class WindManager : MonoBehaviour
             row.soundPiece = grid[i][9];
 
             rowList.Add(row);
-            if(i == 1090 && mpm.isMegarwnL65)
+            /*if(i == 1090 && mpm.isMegarwnL65)
             {
                 i = 2277;
-            }
+            }*/
             
             if (grid[i][0] == grid[num][0] && grid[i][1] == grid[num][1] && grid[i][5] != grid[num][5])
             {
@@ -226,13 +226,13 @@ public class WindManager : MonoBehaviour
     //activate the panel to select which go to change the value
     public void OpenChangeValuesPanel()
     {
-        
+        //mpm.btnSubmit.gameObject.SetActive(false);
         txtBoreValueParent.gameObject.SetActive(false);
         txtMouthpieceValueParent.gameObject.SetActive(false);
         LoadDropDowns();
         pnlChangeValuesScreen.SetActive(true);
         mpm.pnlBottom.SetActive(false);
-        OptionValue();
+        //OptionValue();
         foreach (Toggle toggle in togglesChangedInput) toggle.isOn = false;
         CloseListOfGameObjects();
 
@@ -302,6 +302,14 @@ public class WindManager : MonoBehaviour
             dropdownMouthpiece.interactable = false;
         }
         mpm.pnlBottom.SetActive(true);
+        foreach(Toggle toggle in togglesChangedInput)
+        {
+            if (!toggle.isOn)            
+            {
+                Debug.Log("is not on");
+                mpm.btnSubmit.gameObject.SetActive(false);
+            }
+        }
         mpm.btnChangeValue.gameObject.SetActive(false);
 
         //we should activate the csv file that has all the hole values and will appear only when bore and moutpiece are on default values
@@ -312,11 +320,13 @@ public class WindManager : MonoBehaviour
     //load 3d instrument
     public void Load3DIns(GameObject ins)
     {
+
         ins.SetActive(true);
         mpm.prefab3Dins.SetActive(true);
         mpm.pnlMainWindInstrument.SetActive(false);
         mpm.pnlBottom.SetActive(false);
         mpm.imgMnesiasBack.gameObject.SetActive(false);
+        
         if (mpm.pnlHelp.activeSelf) mpm.CloseHelpPanel();
         if (mpm.pnlExtraMenu.activeSelf) mpm.CloseMenuPanel();
     }
@@ -331,6 +341,7 @@ public class WindManager : MonoBehaviour
             dropdownMouthpiece.ClearOptions();
             dropdownMouthpiece.AddOptions(dafnisValueMouth);
             OpenValues(85);
+            
         }
         else if (mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isDafnis && !mpm.isMegarwnH65 && !mpm.isMegarwnL65)
         {
@@ -458,6 +469,9 @@ public class WindManager : MonoBehaviour
             mpm.imgMegarwnL.SetActive(false);
             mpm.imgHoleExplain.SetActive(true);
             LoadDropDowns();
+
+            mpm.btn3DScene.gameObject.SetActive(true);
+            mpm.btn3DScene.onClick.AddListener(() =>Load3DIns(mpm.windInsDafnis3D));
         }
         else if (mpm.isMegarwnH64 && !mpm.isMegarwnL65 && !mpm.isMegarwnH65 && !mpm.isDafnis && !mpm.isMegarwnL64)
         {
@@ -478,6 +492,8 @@ public class WindManager : MonoBehaviour
             mpm.imgHoleExplain.SetActive(true);
             LoadDropDowns();
 
+            mpm.btn3DScene.gameObject.SetActive(true);
+            mpm.btn3DScene.onClick.AddListener(() => Load3DIns(mpm.windInsMeg643D));
         }
         else if (mpm.isMegarwnH65 && !mpm.isMegarwnH64 && !mpm.isMegarwnL65 && !mpm.isDafnis && !mpm.isMegarwnL64)
         {
@@ -496,6 +512,13 @@ public class WindManager : MonoBehaviour
             mpm.imgMegarwnL.SetActive(true);
             mpm.imgHoleExplain.SetActive(true);
             LoadDropDowns();
+
+            mpm.btn3DScene.gameObject.SetActive(true);
+            mpm.btn3DScene.onClick.AddListener(() => Load3DIns(mpm.windInsMeg653D));
+        }
+        else
+        {
+            mpm.btn3DScene.gameObject.SetActive(false);
         }
         
     }
@@ -558,16 +581,11 @@ public class WindManager : MonoBehaviour
             {
                 togglesChangedInput[i].gameObject.SetActive(false);
             }
-            
-            //OptionValue();
+
             Debug.Log("Submit press");
         }
-        /*else
-        {
-            mpm.pnlWarning.SetActive(true);
-            mpm.pnlWarning.GetComponentInChildren<TextMeshProUGUI>().text = "Αυτη η επιλογή δεν είναι σωστή.";
-            
-        }*/
+        
+        
         if (togglesChangedInput[0].isOn)
         {
             if (mpm.isDafnis)
@@ -681,10 +699,8 @@ public class WindManager : MonoBehaviour
         }
 
         RemoveEffect();
-
-        // }
         mpm.btnChangeValue.gameObject.SetActive(true);
-
+        
     }
 
     //check the dropdowns and which pairs can have an audio for all wind instruments
@@ -694,12 +710,14 @@ public class WindManager : MonoBehaviour
         int boreValue = dropdownBore.value;
         if (mouthPieceValue == 0 && boreValue == 0)
         {
-            Debug.Log("Option Value");
+            Debug.Log("Option Value + default values");
+            mpm.btn3DScene.gameObject.SetActive(true);
            /* if (mpm.isDafnis) OpenValues(85);
             else*/ ShowHoleExtraValues();
             //HoleSelection();
 
             btnHolesChange.interactable = true;
+           
             return true;
         }
         else if (mouthPieceValue == 0 && boreValue == 1)
@@ -714,7 +732,8 @@ public class WindManager : MonoBehaviour
                 OpenValues(2309);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && mpm.isMegarwnH65)
                 OpenValues(1737);
-
+            Debug.Log("No default values");
+            
             btnHolesChange.interactable = false;
             CloseListOfGameObjects();
 
@@ -807,10 +826,10 @@ public class WindManager : MonoBehaviour
         }
         else
         {
-            
             return false;
-
         }
+        
+        
     }
 
 
@@ -994,7 +1013,7 @@ public class WindManager : MonoBehaviour
         {
             if (togglesChangedInput[0].isOn)
             {
-
+                
                 for (int i = 0; i < inputValueDistanceHole.Length; i++)
                 {
 
@@ -1023,7 +1042,7 @@ public class WindManager : MonoBehaviour
             }
             else if (togglesChangedInput[1].isOn)
             {
-
+                
                 for (int i = 0; i < distanceInputs.Length - 8; i++)
                 {
                     foreach (TextMeshProUGUI myText in distanceInputs[i].GetComponentsInChildren<TextMeshProUGUI>())
@@ -1052,6 +1071,7 @@ public class WindManager : MonoBehaviour
             }
             else if (togglesChangedInput[2].isOn)
             {
+                
                 for (int i = 0; i < distanceInputs.Length - 8; i++)
                 {
                     foreach (TextMeshProUGUI myText in distanceInputs[i + 8].GetComponentsInChildren<TextMeshProUGUI>())
@@ -1083,7 +1103,7 @@ public class WindManager : MonoBehaviour
         {
             if (togglesChangedInput[0].isOn)
             {
-
+                
                 for (int i = 0; i < inputValueDistanceHole.Length; i++)
                 {
 
@@ -1112,7 +1132,7 @@ public class WindManager : MonoBehaviour
             }
             else if (togglesChangedInput[1].isOn)
             {
-
+                
                 for (int i = 0; i < distanceInputs.Length - 8; i++)
                 {
                     foreach (TextMeshProUGUI myText in distanceInputs[i].GetComponentsInChildren<TextMeshProUGUI>())
@@ -1141,6 +1161,7 @@ public class WindManager : MonoBehaviour
             }
             else if (togglesChangedInput[2].isOn)
             {
+                
                 for (int i = 0; i < distanceInputs.Length - 8; i++)
                 {
                     foreach (TextMeshProUGUI myText in distanceInputs[i + 8].GetComponentsInChildren<TextMeshProUGUI>())
@@ -1172,7 +1193,6 @@ public class WindManager : MonoBehaviour
         {
             if (togglesChangedInput[0].isOn)
             {
-
                 for (int i = 0; i < inputValueDistanceHole.Length; i++)
                 {
 
@@ -1201,7 +1221,7 @@ public class WindManager : MonoBehaviour
             }
             else if (togglesChangedInput[1].isOn)
             {
-
+               
                 for (int i = 0; i < distanceInputs.Length - 8; i++)
                 {
                     foreach (TextMeshProUGUI myText in distanceInputs[i].GetComponentsInChildren<TextMeshProUGUI>())
@@ -1209,7 +1229,7 @@ public class WindManager : MonoBehaviour
                         myText.color = new Color32(0, 0, 0, 255);
 
                     }
-                    Debug.Log("I value: " + i);
+                    
                 }
                 for (int j = 0; j < distanceInputs.Length - 8; j++)
                 {
@@ -1231,6 +1251,7 @@ public class WindManager : MonoBehaviour
             }
             else if (togglesChangedInput[2].isOn)
             {
+               
                 //Debug.Log("Is it On: " + togglesChangedInput[2].isOn);
                 for (int i = 0; i < distanceInputs.Length - 8; i++)
                 {
@@ -1264,7 +1285,7 @@ public class WindManager : MonoBehaviour
         {
             if (togglesChangedInput[0].isOn)
             {
-
+                
                 for (int i = 0; i < inputValueDistanceHole.Length; i++)
                 {
 
@@ -1293,7 +1314,7 @@ public class WindManager : MonoBehaviour
             }
             else if (togglesChangedInput[1].isOn)
             {
-
+                
                 for (int i = 0; i < distanceInputs.Length - 8; i++)
                 {
                     foreach (TextMeshProUGUI myText in distanceInputs[i].GetComponentsInChildren<TextMeshProUGUI>())
@@ -1323,6 +1344,7 @@ public class WindManager : MonoBehaviour
             }
             else if (togglesChangedInput[2].isOn)
             {
+                
                 //Debug.Log("Is it On: " + togglesChangedInput[2].isOn);
                 for (int i = 0; i < distanceInputs.Length - 8; i++)
                 {
@@ -1356,7 +1378,7 @@ public class WindManager : MonoBehaviour
         {
             if (togglesChangedInput[0].isOn)
             {
-
+                
                 for (int i = 0; i < inputValueDistanceHole.Length; i++)
                 {
 
@@ -1385,7 +1407,7 @@ public class WindManager : MonoBehaviour
             }
             else if (togglesChangedInput[1].isOn)
             {
-
+                
                 for (int i = 0; i < distanceInputs.Length - 8; i++)
                 {
                     foreach (TextMeshProUGUI myText in distanceInputs[i].GetComponentsInChildren<TextMeshProUGUI>())
@@ -1414,6 +1436,7 @@ public class WindManager : MonoBehaviour
             }
             else if (togglesChangedInput[2].isOn)
             {
+                
                 for (int i = 0; i < distanceInputs.Length - 8; i++)
                 {
                     foreach (TextMeshProUGUI myText in distanceInputs[i + 8].GetComponentsInChildren<TextMeshProUGUI>())
@@ -1445,7 +1468,14 @@ public class WindManager : MonoBehaviour
         {
             RemoveEffect();
         }
-
+        foreach (Toggle toggle in togglesChangedInput)
+        {
+            if (toggle.isOn)
+            {
+                mpm.btnSubmit.gameObject.SetActive(true);
+                Debug.Log("is on");
+            }
+        }
     }
 
     //when we submit or change option on toggles, we remove the text effect on the texts

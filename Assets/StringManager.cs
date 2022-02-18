@@ -393,6 +393,7 @@ public class StringManager : MonoBehaviour
     //when selecting tension values this is where we enable the gameObjects (toggles, inputs, etc)
     private void ActivateTensionTogglesAndInputs()
     {
+
         mpm.ButtonsWhenChangeValues();
         if (pnlChangeValuesScreen.activeSelf)
         {
@@ -621,6 +622,7 @@ public class StringManager : MonoBehaviour
             togglesTensionInput[i].gameObject.SetActive(false);
         }
         RemoveTextEffect();
+        
         mpm.btnChangeValue.gameObject.SetActive(true);
         Debug.Log("Submit press");
     }
@@ -749,6 +751,10 @@ public class StringManager : MonoBehaviour
                 }
             }
         }
+        
+        foreach(Toggle toggleD in togglesDensityInput) { if (toggleD.isOn) mpm.btnSubmit.gameObject.SetActive(true); }
+        foreach(Toggle toggleL in togglesLengthInput) { if (toggleL.isOn) mpm.btnSubmit.gameObject.SetActive(true); }
+        foreach(Toggle toggleT in togglesTensionInput) { if (toggleT.isOn) mpm.btnSubmit.gameObject.SetActive(true); }
     }
 
     //when pressing the submit button, the text effect on the values will be removed also the same goes on reset
@@ -785,6 +791,7 @@ public class StringManager : MonoBehaviour
     //show tension extra values, from selecting one of the two toggles (set1, set2)
     public void ShowTensionExtraValues()
     {
+        CheckTheToggle();
         if (mpm.isTrigono)
         {
             for (int k = 0; k < grid.Length; k++)
@@ -827,6 +834,7 @@ public class StringManager : MonoBehaviour
     //show length extra values, from selecting one of the two toggles (set1, set2)
     public void ShowLenghtExtraValues()
     {
+        CheckTheToggle();
         if (mpm.isTrigono)
         {
             for (int k = 0; k < grid.Length; k++)
@@ -868,6 +876,7 @@ public class StringManager : MonoBehaviour
     //show density extra values, from selecting one of the two toggles (set1, set2)
     public void ShowDensityExtraValues()
     {
+        CheckTheToggle();
         if (mpm.isTrigono)
         {
             for (int k = 0; k < grid.Length; k++)
@@ -905,7 +914,15 @@ public class StringManager : MonoBehaviour
         
 
     }
-    
+    //to prevent error in case the user won't select one of the toggles. When select, then the Submit button is active
+    void CheckTheToggle()
+    {
+        foreach (Toggle toggle in togglesDensityInput){if (!toggle.isOn) mpm.btnSubmit.gameObject.SetActive(false);}
+
+        foreach (Toggle toggleL in togglesLengthInput){if (!toggleL.isOn) mpm.btnSubmit.gameObject.SetActive(false);}
+
+        foreach (Toggle toggleT in togglesTensionInput) if (!toggleT.isOn) mpm.btnSubmit.gameObject.SetActive(false);
+    }
     //reset values on string instrument
     public void OnResetString()
     {
