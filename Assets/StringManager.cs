@@ -488,6 +488,7 @@ public class StringManager : MonoBehaviour
         {
             rowS.folderS = grid[54][7];
             mpm.myAudio.LoadAudio(rowS.folderS + "/");
+            mpm.btn3DScene.gameObject.SetActive(true);
             isCorrect = true;
             for (int i = 0; i < lengthInputs.Length-26; i++)
             {
@@ -510,6 +511,7 @@ public class StringManager : MonoBehaviour
         {
             rowS.folderS = grid[221][7];
             mpm.myAudio.LoadAudio(rowS.folderS + "/");
+            mpm.btn3DScene.gameObject.SetActive(true);
             isCorrect = true;
             for (int i = 0; i < lengthInputs.Length - 26; i++)
             {
@@ -534,6 +536,7 @@ public class StringManager : MonoBehaviour
         {
             rowS.folderS = grid[106][7];
             mpm.myAudio.LoadAudio(rowS.folderS + "/");
+            mpm.btn3DScene.gameObject.SetActive(true);
             isCorrect = true;
             for(int i = 0; i < tensionInputs.Length - 26; i++)
             {
@@ -954,7 +957,7 @@ public class StringManager : MonoBehaviour
         RemoveTextEffect();
         
         if (mpm.pnlExtraMenu.activeSelf) mpm.CloseMenuPanel();
-
+        mpm.btn3DScene.gameObject.SetActive(true);
     }
 
 #endregion

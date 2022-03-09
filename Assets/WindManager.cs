@@ -167,10 +167,6 @@ public class WindManager : MonoBehaviour
             row.soundPiece = grid[i][9];
 
             rowList.Add(row);
-            /*if(i == 1090 && mpm.isMegarwnL65)
-            {
-                i = 2277;
-            }*/
             
             if (grid[i][0] == grid[num][0] && grid[i][1] == grid[num][1] && grid[i][5] != grid[num][5])
             {
@@ -198,14 +194,14 @@ public class WindManager : MonoBehaviour
                     return;
                 }
             }
-            if (!mpm.isDafnis && !mpm.isMegarwnH64 && mpm.isMegarwnL64 || mpm.isMegarwnH65 && !mpm.isMegarwnL65)
+            if (!mpm.isDafnis && !mpm.isMegarwnH64 && mpm.isMegarwnL64 || mpm.isMegarwnH65 || mpm.isMegarwnL65 && !mpm.isMegarwnL65)
             {
                 if (i == num + 8)
                 {
                     return;
                 }
             }
-            if (!mpm.isDafnis && mpm.isMegarwnH64 || mpm.isMegarwnL65 && !mpm.isMegarwnL64 && !mpm.isMegarwnH65)
+            if (!mpm.isDafnis && mpm.isMegarwnH64  && !mpm.isMegarwnL64 && !mpm.isMegarwnH65 && !mpm.isMegarwnL65)
             {
                 if (i == num + 7)
                 {
@@ -411,30 +407,36 @@ public class WindManager : MonoBehaviour
             {
                 inputValueDistanceHole[j].gameObject.SetActive(true);
             }
-            mpm.imgDafnis.SetActive(false);
-            mpm.imgMegarwnH.SetActive(false);
-            mpm.imgMegarwnL.SetActive(true);
-            mpm.imgHoleExplain.SetActive(true);
+            
             LoadDropDowns();
+
+            mpm.btn3DScene.gameObject.SetActive(true);
+            OpenClose3DIns(false, false, true, false, false);
+            mpm.btn3DScene.onClick.AddListener(() => Load3DIns(mpm.windInsMeg64L3D));
+
         }
         else if (mpm.isMegarwnL65 && !mpm.isMegarwnL64 && !mpm.isMegarwnH64 && !mpm.isMegarwnH65 && !mpm.isDafnis)
         {
             OpenValues(2277);
             for (int i = 0; i < inputValueDiameterHole.Length; i++)
             {
-                inputValueDiameterHole[inputValueDiameterHole.Length - 1].gameObject.SetActive(false);
-                inputValueDiameterHole[inputValueDiameterHole.Length - 1].transform.parent.gameObject.SetActive(false);
+                inputValueDiameterHole[i].gameObject.SetActive(true);
+                inputValueDiameterHole[i].transform.parent.gameObject.SetActive(true);
 
             }
             for (int j = 0; j < inputValueDistanceHole.Length; j++)
             {
-                inputValueDistanceHole[inputValueDistanceHole.Length - 1].gameObject.SetActive(false);
+                inputValueDistanceHole[j].gameObject.SetActive(true);
             }
             mpm.imgDafnis.SetActive(false);
             mpm.imgMegarwnH.SetActive(true);
             mpm.imgMegarwnL.SetActive(false);
             mpm.imgHoleExplain.SetActive(true);
             LoadDropDowns();
+
+            mpm.btn3DScene.gameObject.SetActive(true);
+            OpenClose3DIns(false, false, false, false, true);
+            mpm.btn3DScene.onClick.AddListener(() => Load3DIns(mpm.windInsMeg65L3D));
         }
     }
 
@@ -464,14 +466,17 @@ public class WindManager : MonoBehaviour
                 inputValueDistanceHole[inputValueDistanceHole.Length - 2].gameObject.SetActive(false);
             }
 
-            mpm.imgDafnis.SetActive(true);
+            /*mpm.imgDafnis.SetActive(true);
             mpm.imgMegarwnH.SetActive(false);
-            mpm.imgMegarwnL.SetActive(false);
+            mpm.imgMegarwnL.SetActive(false);*/
+            mpm.windInsMeg64H3D.SetActive(false);
             mpm.imgHoleExplain.SetActive(true);
             LoadDropDowns();
 
             mpm.btn3DScene.gameObject.SetActive(true);
-            mpm.btn3DScene.onClick.AddListener(() =>Load3DIns(mpm.windInsDafnis3D));
+            OpenClose3DIns(true, false, false, false, false);
+            mpm.btn3DScene.onClick.AddListener(() => Load3DIns(mpm.windInsDafnis3D));
+
         }
         else if (mpm.isMegarwnH64 && !mpm.isMegarwnL65 && !mpm.isMegarwnH65 && !mpm.isDafnis && !mpm.isMegarwnL64)
         {
@@ -493,11 +498,13 @@ public class WindManager : MonoBehaviour
             LoadDropDowns();
 
             mpm.btn3DScene.gameObject.SetActive(true);
-            mpm.btn3DScene.onClick.AddListener(() => Load3DIns(mpm.windInsMeg643D));
+            OpenClose3DIns(false, true, false, false, false);
+            mpm.btn3DScene.onClick.AddListener(() => Load3DIns(mpm.windInsMeg64H3D));
+
         }
         else if (mpm.isMegarwnH65 && !mpm.isMegarwnH64 && !mpm.isMegarwnL65 && !mpm.isDafnis && !mpm.isMegarwnL64)
         {
-            OpenValues(1665);
+            OpenValues(1701);
             for (int i = 0; i < inputValueDiameterHole.Length; i++)
             {
                 inputValueDiameterHole[i].gameObject.SetActive(true);
@@ -514,7 +521,8 @@ public class WindManager : MonoBehaviour
             LoadDropDowns();
 
             mpm.btn3DScene.gameObject.SetActive(true);
-            mpm.btn3DScene.onClick.AddListener(() => Load3DIns(mpm.windInsMeg653D));
+            OpenClose3DIns(false,false,false,true,false);
+            mpm.btn3DScene.onClick.AddListener(() => Load3DIns(mpm.windInsMeg65H3D));
         }
         else
         {
@@ -731,7 +739,7 @@ public class WindManager : MonoBehaviour
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && mpm.isMegarwnL65 && !mpm.isMegarwnH65)
                 OpenValues(2309);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && mpm.isMegarwnH65)
-                OpenValues(1737);
+                OpenValues(1738);
             Debug.Log("No default values");
             
             btnHolesChange.interactable = false;
@@ -1569,6 +1577,15 @@ public class WindManager : MonoBehaviour
         Debug.Log("Input Value");
         txtBoreValue.text = dropdownBore.options[dropdownBore.value].text;
         txtMouthpieceValue.text = dropdownMouthpiece.options[dropdownMouthpiece.value].text;
+    }
+
+    void OpenClose3DIns(bool isDafnis, bool isMeg64H, bool isMeg64L,bool isMeg65H,bool isMeg65L)
+    {
+        mpm.windInsDafnis3D.SetActive(isDafnis);
+        mpm.windInsMeg64H3D.SetActive(isMeg64H);
+        mpm.windInsMeg64L3D.SetActive(isMeg64L);
+        mpm.windInsMeg65H3D.SetActive(isMeg65H);
+        mpm.windInsMeg65L3D.SetActive(isMeg65L);
     }
     #endregion
 

@@ -73,15 +73,21 @@ public class MainPCManager : MonoBehaviour
     public Button btnCloseString;
     public Button btnReset;
     public GameObject windInsDafnis3D;
-    public GameObject windInsMeg643D;
-    public GameObject windInsMeg653D;
+    public GameObject windInsMeg64H3D;
+    public GameObject windInsMeg64L3D;
+    public GameObject windInsMeg65H3D;
+    public GameObject windInsMeg65L3D;
     public GameObject trigonoIns3D;
     public GameObject LyraIns3D;
+    public GameObject imgWindContainer;
+    public GameObject imgStringContainer;
     public Sprite imgTrigono;
     public Sprite imgHelys;
     public Sprite imgWindDafnis;
-    public Sprite imgWindMegarwn64;
-    public Sprite imgWindMegarwn65;
+    public Sprite imgWindMegarwn64H;
+    public Sprite imgWindMegarwn64L;
+    public Sprite imgWindMegarwn65H;
+    public Sprite imgWindMegarwn65L;
 
 
     //the help panel go's
@@ -128,9 +134,9 @@ public class MainPCManager : MonoBehaviour
     [Header("Managers")]
     public WindManager wm;//the wind manager in order to access methods, variables, etc
     public StringManager sm;//the string manager in order to access methods, variables, etc
-#if PLATFORM_ANDROID || PLATFORM_IOS
+
     public MobileScript ms;//script that is only used when we are on a device platform
-#endif
+
     public SmartMotion helpMotion;//in order to get the method to close the panel with motion.
     public SmartMotion menuMotion;//in order to get the method to close the panel with motion.
     #endregion
@@ -147,7 +153,8 @@ public class MainPCManager : MonoBehaviour
         imgMegarwnH.SetActive(false);
         imgMegarwnL.SetActive(false);
         imgHoleExplain.SetActive(false);
-        //imgHeplGraphic.gameObject.SetActive(false);
+        imgWindContainer.gameObject.SetActive(false);
+        imgStringContainer.gameObject.SetActive(false);
         txtInstrument.gameObject.SetActive(false);
 
         ClosedPanelsGO(false, false, false, false, false, false);
@@ -165,27 +172,23 @@ public class MainPCManager : MonoBehaviour
 
         btnCloseWarning.onClick.AddListener(ClosePanels);
         windInsDafnis3D.SetActive(false);
-        windInsMeg643D.SetActive(false);
-        windInsMeg653D.SetActive(false);
+        windInsMeg64H3D.SetActive(false);
+        windInsMeg64L3D.SetActive(false);
+        windInsMeg65H3D.SetActive(false);
+        windInsMeg65L3D.SetActive(false);
         trigonoIns3D.SetActive(false);
         LyraIns3D.SetActive(false);
         pnlBottom.SetActive(false);
+
         imgContainerExtraInfo.SetActive(false);
         LoadInstrumentFiles("Instruments/");
 
         pnlExtraInfo.SetActive(false);
         hasSelected = false;
-#if PLATFORM_ANDROID || PLATFORM_IOS
+
         ms = GetComponent<MobileScript>();
         ms.pnlSound.SetActive(false);
-        ms.imgAulos.gameObject.SetActive(false);
-        ms.imgMegarwn64.gameObject.SetActive(false);
-        ms.imgMegarwn65.gameObject.SetActive(false);
-        ms.imgTrigono.gameObject.SetActive(false);
-        ms.imgHelys.gameObject.SetActive(false);
         ms.txtTitleInstrument.gameObject.SetActive(false);
-
-#endif
 
     }
 
@@ -256,7 +259,7 @@ public class MainPCManager : MonoBehaviour
         imgMnesiasBack.gameObject.SetActive(true);
         wm.isBack = false;
 
-        //btn3DScene.gameObject.SetActive(true);
+        btn3DScene.gameObject.SetActive(true);
         btn3DScene.onClick.RemoveAllListeners();
 
         if (isDafnis && !(isMegarwnH64 || isMegarwnL64 || isMegarwnH65 || isMegarwnL65))
@@ -264,64 +267,67 @@ public class MainPCManager : MonoBehaviour
             txtInstrument.gameObject.SetActive(true);
             txtInstrument.text = "> " + btnAulosDafnis.GetComponentInChildren<TextMeshProUGUI>().text;
             wm.btnBarrytone.interactable = false;
+
+            /*windInsDafnis3D.SetActive(true);
+            windInsMeg64H3D.SetActive(false);
+            windInsMeg64L3D.SetActive(false);
+            windInsMeg65H3D.SetActive(false);
+            windInsMeg65L3D.SetActive(false);*/
+
             
+            imgWindContainer.GetComponent<Image>().sprite = imgWindDafnis;
 
-#if PLATFORM_ANDROID || PLATFORM_IOS
-            ms.imgMegarwn64.gameObject.SetActive(false);
-            ms.imgMegarwn65.gameObject.SetActive(false);
-            ms.imgAulos.gameObject.SetActive(true);
-            ms.imgTrigono.gameObject.SetActive(false);
-            ms.imgHelys.gameObject.SetActive(false);
-
-#else
-            imgContainerWindIstrument.GetComponent<Image>().sprite = imgWindDafnis;
-#endif
-#if !PLATFORM_WEBGL
             LoadClips("dafnis/");
-#endif
 
-#if PLATFORM_WEBGL
-            LoadMuseumVideos("http://mnesias.diadrasis.net/mnesiasVideo/Αυλος_Δαφνης.m4v","");
-#endif
         }
         else if (isMegarwnH64 || isMegarwnL64 && !isDafnis && !isMegarwnL65 && !isMegarwnH65)
         {
             txtInstrument.gameObject.SetActive(true);
             txtInstrument.text = "> " + btnAulosMegara64.GetComponentInChildren<TextMeshProUGUI>().text;
             wm.btnBarrytone.interactable = true;
-            
 
-#if PLATFORM_ANDROID || PLATFORM_IOS
-            ms.imgMegarwn64.gameObject.SetActive(true);
-            ms.imgMegarwn65.gameObject.SetActive(false);
-            ms.imgAulos.gameObject.SetActive(false);
-            ms.imgTrigono.gameObject.SetActive(false);
-            ms.imgHelys.gameObject.SetActive(false);
-#else
-            imgContainerWindIstrument.GetComponent<Image>().sprite = imgWindMegarwn64;
-#endif
-#if !PLATFORM_WEBGL
+            /*windInsDafnis3D.SetActive(false);
+            if (isMegarwnH64)
+            {
+                windInsMeg64H3D.SetActive(true);
+                btn3DScene.onClick.AddListener(() => wm.Load3DIns(windInsMeg64H3D));
+            }
+            else
+            {
+                windInsMeg64L3D.SetActive(true);
+                btn3DScene.onClick.AddListener(() => wm.Load3DIns(windInsMeg64L3D));
+            }
+           
+            
+            windInsMeg65H3D.SetActive(false);
+            windInsMeg65L3D.SetActive(false);*/
+
+
             LoadClips("megarwnH64/");
-#endif
-#if PLATFORM_WEBGL
-            LoadMuseumVideos("http://mnesias.diadrasis.net/mnesiasVideo/Μεγαρα_1964.m4v","");
-#endif
+            imgWindContainer.GetComponent<Image>().sprite = imgWindMegarwn64H;
         }
         else if (isMegarwnL65 || isMegarwnH65 && !isDafnis && !isMegarwnH64 && !isMegarwnL64)
         {
             txtInstrument.gameObject.SetActive(true);
             txtInstrument.text = "> " + btnAulosMegara65.GetComponentInChildren<TextMeshProUGUI>().text;
             wm.btnBarrytone.interactable = true;
+
             
-#if PLATFORM_ANDROID || PLATFORM_IOS
-            ms.imgMegarwn64.gameObject.SetActive(false);
-            ms.imgMegarwn65.gameObject.SetActive(true);
-            ms.imgAulos.gameObject.SetActive(false);
-            ms.imgTrigono.gameObject.SetActive(false);
-            ms.imgHelys.gameObject.SetActive(false);
-#else
-            imgContainerWindIstrument.GetComponent<Image>().sprite = imgWindMegarwn65;
-#endif
+            /*windInsDafnis3D.SetActive(false);
+            windInsMeg64H3D.SetActive(false);
+            windInsMeg64L3D.SetActive(false);
+            if (isMegarwnH65)
+            {
+                windInsMeg65H3D.SetActive(true);
+                btn3DScene.onClick.AddListener(() => wm.Load3DIns(windInsMeg65H3D));
+            }
+            else
+            {
+                windInsMeg65L3D.SetActive(true);
+                btn3DScene.onClick.AddListener(() => wm.Load3DIns(windInsMeg65L3D));
+            }*/
+
+            imgWindContainer.GetComponent<Image>().sprite = imgWindMegarwn65H;
         }
 
         btnSubmit.onClick.AddListener(wm.OnSubmit);
@@ -332,9 +338,9 @@ public class MainPCManager : MonoBehaviour
         if (pnlHelp.activeSelf) CloseHelpPanel();
 
         btnReset.onClick.AddListener(wm.OnReset);
-#if PLATFORM_ANDROID || PLATFORM_IOS
+
         ms.btnPlayPanel.gameObject.SetActive(true);
-#endif
+
     }
 
 
@@ -353,8 +359,10 @@ public class MainPCManager : MonoBehaviour
         imgMnesiasBack.gameObject.SetActive(true);
 
         windInsDafnis3D.SetActive(false);
-        windInsMeg653D.SetActive(false);
-        windInsMeg643D.SetActive(false);
+        windInsMeg65H3D.SetActive(false);
+        windInsMeg64L3D.SetActive(false);
+        windInsMeg64H3D.SetActive(false);
+        windInsMeg65L3D.SetActive(false);
 
         if (pnlHelp.activeSelf) CloseHelpPanel();
 
@@ -372,25 +380,15 @@ public class MainPCManager : MonoBehaviour
             sm.CloseListOfGameObjectsTrigono();
 
             trigonoIns3D.SetActive(true);
+            LyraIns3D.gameObject.SetActive(false);
             btn3DScene.gameObject.SetActive(true);
             btn3DScene.onClick.AddListener(() => sm.Load3DIns(trigonoIns3D));
-            LyraIns3D.gameObject.SetActive(false);
-#if !PLATFORM_WEBGL
-            LoadClips("Trigonon/");
-#endif
-#if PLATFORM_WEBGL
-            LoadMuseumVideos("http://mnesias.diadrasis.net/mnesiasVideo/Τριγωνο.m4v","");
-#endif
+            
 
-#if PLATFORM_IOS || PLATFORM_ANDROID
-            ms.imgAulos.gameObject.SetActive(false);
-            ms.imgMegarwn64.gameObject.SetActive(false);
-            ms.imgMegarwn65.gameObject.SetActive(false);
-            ms.imgTrigono.gameObject.SetActive(true);
-            ms.imgHelys.gameObject.SetActive(false);
-#else
-imgContainerStringInstrument.GetComponent<Image>().sprite = imgTrigono;
-#endif
+            LoadClips("Trigonon/");
+
+           
+            imgStringContainer.GetComponent<Image>().sprite = imgTrigono;
 
         }
         else if (isLyra && !isTrigono)
@@ -402,29 +400,16 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgTrigono;
             LyraIns3D.SetActive(true);
             btn3DScene.onClick.AddListener(() => sm.Load3DIns(LyraIns3D));
             trigonoIns3D.gameObject.SetActive(false);
-#if !PLATFORM_WEBGL
-            LoadClips("Helys/");
-#endif
-#if PLATFORM_WEBGL
-            LoadMuseumVideos("http://mnesias.diadrasis.net/mnesiasVideo/Λυρα.m4v","");
-#endif
-            
-#if PLATFORM_IOS || PLATFORM_ANDROID
-            ms.imgAulos.gameObject.SetActive(false);
-            ms.imgMegarwn64.gameObject.SetActive(false);
-            ms.imgMegarwn65.gameObject.SetActive(false);
-            ms.imgTrigono.gameObject.SetActive(false);
-            ms.imgHelys.gameObject.SetActive(true);
-#else
-imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
-#endif
 
+            LoadClips("Helys/");
+
+            imgStringContainer.GetComponent<Image>().sprite = imgHelys;
         }
 
         btnReset.onClick.AddListener(sm.OnResetString);//reset values
-#if PLATFORM_ANDROID || PLATFORM_IOS
+
         ms.btnPlayPanel.gameObject.SetActive(false);
-#endif
+
     }
 
 
@@ -455,8 +440,10 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
                 btnExtraMenu.gameObject.SetActive(false);
                 separate.SetActive(false);
                 windInsDafnis3D.SetActive(false);
-                windInsMeg653D.SetActive(false);
-                windInsMeg643D.SetActive(false);
+                windInsMeg65H3D.SetActive(false);
+                windInsMeg64L3D.SetActive(false);
+                windInsMeg64H3D.SetActive(false);
+                windInsMeg65L3D.SetActive(false);
                 trigonoIns3D.SetActive(false);
                 LyraIns3D.SetActive(false);
             }
@@ -540,13 +527,6 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
             separate.SetActive(true);
             btn3DScene.gameObject.SetActive(false);
 
-#if PLATFORM_ANDROID || PLATFORM_IOS
-            ms.imgAulos.gameObject.SetActive(false);
-            ms.imgMegarwn64.gameObject.SetActive(false);
-            ms.imgMegarwn65.gameObject.SetActive(false);
-            ms.imgHelys.gameObject.SetActive(false);
-            ms.imgTrigono.gameObject.SetActive(false);
-#endif
 
             if (isDafnis || isTrigono || isLyra)
             {
@@ -614,13 +594,13 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
             pnlBottom.SetActive(true);
         }
 
-#if PLATFORM_ANDROID || PLATFORM_IOS
+
         if (ms.pnlSound.activeSelf)
         {
             ms.pnlSound.SetActive(false);
             pnlBottom.gameObject.SetActive(true);
         }
-#endif
+
 
     }
 
@@ -637,8 +617,10 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
         ClosedPanelsGO(false, false, true, true, true, false);
 
         windInsDafnis3D.SetActive(false);
-        windInsMeg653D.SetActive(false);
-        windInsMeg643D.SetActive(false);
+        windInsMeg65H3D.SetActive(false);
+        windInsMeg65L3D.SetActive(false);
+        windInsMeg64H3D.SetActive(false);
+        windInsMeg64L3D.SetActive(false);
         trigonoIns3D.SetActive(false);
         LyraIns3D.SetActive(false);
         btnExtraMenu.gameObject.SetActive(false);
@@ -655,9 +637,9 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
         for (int i = 0; i < instrument.Length; i++)
         {
             txtInstrument.gameObject.SetActive(true);
-#if PLATFORM_IOS || PLATFORM_ANDROID
+
             ms.txtTitleInstrument.gameObject.SetActive(true);
-#endif
+
 
             if (instrument[i].nameInstrument.Contains(btnAulosDafnis.GetComponentInChildren<TextMeshProUGUI>().text))
             {
@@ -666,9 +648,9 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
                 imgContainer.GetComponent<Image>().sprite = instrument[i].imgInstrument;
                 txtMainTextInstrument.text = instrument[i].mainText;
                 txtCaptionInstrument.text = instrument[i].txtUnderImage;
-#if PLATFORM_IOS || PLATFORM_ANDROID
+
                 ms.txtTitleInstrument.text = instrument[i].nameInstrument;
-#endif
+
 
             }
 
@@ -685,8 +667,10 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
     {
         ClosedPanelsGO(false, false, true, true, true, false);
         windInsDafnis3D.SetActive(false);
-        windInsMeg653D.SetActive(false);
-        windInsMeg643D.SetActive(false);
+        windInsMeg65H3D.SetActive(false);
+        windInsMeg65L3D.SetActive(false);
+        windInsMeg64H3D.SetActive(false);
+        windInsMeg64L3D.SetActive(false);
         trigonoIns3D.SetActive(false);
         LyraIns3D.SetActive(false);
         btnExtraMenu.gameObject.SetActive(false);
@@ -704,9 +688,9 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
         {
             txtInstrument.gameObject.SetActive(true);
 
-#if PLATFORM_IOS || PLATFORM_ANDROID
+
             ms.txtTitleInstrument.gameObject.SetActive(true);
-#endif
+
             if (instrument[i].nameInstrument.Contains(btnAulosMegara64.GetComponentInChildren<TextMeshProUGUI>().text))
             {
                 OpenExtraInfoImage();
@@ -714,9 +698,8 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
                 imgContainer.GetComponent<Image>().sprite = instrument[i].imgInstrument;
                 txtMainTextInstrument.text = instrument[i].mainText;
                 txtCaptionInstrument.text = instrument[i].txtUnderImage;
-#if PLATFORM_IOS || PLATFORM_ANDROID
+
                 ms.txtTitleInstrument.text = instrument[i].nameInstrument;
-#endif
             }
 
 
@@ -736,8 +719,10 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
 
 
         windInsDafnis3D.SetActive(false);
-        windInsMeg653D.SetActive(false);
-        windInsMeg643D.SetActive(false);
+        windInsMeg65H3D.SetActive(false);
+        windInsMeg65L3D.SetActive(false);
+        windInsMeg64H3D.SetActive(false);
+        windInsMeg64L3D.SetActive(false);
         trigonoIns3D.SetActive(false);
         LyraIns3D.SetActive(false);
 
@@ -752,9 +737,9 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
         isMegarwnH64 = false;
         isMegarwnL64 = false;
 
-#if PLATFORM_IOS || PLATFORM_ANDROID
+
         ms.txtTitleInstrument.gameObject.SetActive(true);
-#endif
+
         for (int i = 0; i < instrument.Length; i++)
         {
             txtInstrument.gameObject.SetActive(true);
@@ -768,9 +753,9 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
                 txtMainTextInstrument.text = instrument[i].mainText;
                 txtCaptionInstrument.text = instrument[i].txtUnderImage;
 
-#if PLATFORM_IOS || PLATFORM_ANDROID
+
                 ms.txtTitleInstrument.text = instrument[i].nameInstrument;
-#endif
+
             }
 
 
@@ -803,9 +788,9 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
         for (int i = 0; i < instrument.Length; i++)
         {
             txtInstrument.gameObject.SetActive(true);
-#if PLATFORM_IOS || PLATFORM_ANDROID
+
             ms.txtTitleInstrument.gameObject.SetActive(true);
-#endif
+
 
             if (instrument[i].nameInstrument.Contains(btnTrigono.GetComponentInChildren<TextMeshProUGUI>().text))
             {
@@ -814,9 +799,9 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
                 imgContainer.GetComponent<Image>().sprite = instrument[i].imgInstrument;
                 txtMainTextInstrument.text = instrument[i].mainText;
                 txtCaptionInstrument.text = instrument[i].txtUnderImage;
-#if PLATFORM_IOS || PLATFORM_ANDROID
+
                 ms.txtTitleInstrument.text = instrument[i].nameInstrument;
-#endif
+
             }
 
 
@@ -847,9 +832,9 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
         for (int i = 0; i < instrument.Length; i++)
         {
             txtInstrument.gameObject.SetActive(true);
-#if PLATFORM_IOS || PLATFORM_ANDROID
+
             ms.txtTitleInstrument.gameObject.SetActive(true);
-#endif
+
 
             if (instrument[i].nameInstrument.Contains(btnLyra.GetComponentInChildren<TextMeshProUGUI>().text))
             {
@@ -858,9 +843,9 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
                 imgContainer.GetComponent<Image>().sprite = instrument[i].imgInstrument;
                 txtMainTextInstrument.text = instrument[i].mainText;
                 txtCaptionInstrument.text = instrument[i].txtUnderImage;
-#if PLATFORM_IOS || PLATFORM_ANDROID
+
                 ms.txtTitleInstrument.text = instrument[i].nameInstrument;
-#endif
+
             }
 
 
@@ -1028,13 +1013,9 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
         separate.SetActive(true);
         btn3DScene.gameObject.SetActive(false);
 
-#if !PLATFORM_WEBGL
-        LoadClips("Piraeus/");
-#endif
 
-#if PLATFORM_WEBGL
-        LoadMuseumVideos("http://mnesias.diadrasis.net/mnesiasVideo/Η_Αρπα_της_Δαφνης.m4v", "http://mnesias.diadrasis.net/mnesiasVideo/Η_Λυρα_της_δαφνης.m4v");
-#endif
+        LoadClips("Piraeus/");
+
 
         if (isPiraeus && !isMegara) btnMuseum.onClick.AddListener(() => buttonLevel.URl("http://odysseus.culture.gr/h/1/gh151.jsp?obj_id=3371"));
 
@@ -1067,13 +1048,9 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
         btnMuseum.onClick.RemoveAllListeners();
         btnExtraMenu.gameObject.SetActive(true);
         separate.SetActive(true);
-#if !PLATFORM_WEBGL
+
         LoadClips("Megara/");
-#endif
-#if PLATFORM_WEBGL
-        LoadMuseumVideos("http://mnesias.diadrasis.net/mnesiasVideo/Αυλος_1.m4v", "http://mnesias.diadrasis.net/mnesiasVideo/Αυλος_2.m4v");
-       
-#endif
+
 
         if (!isPiraeus && isMegara) btnMuseum.onClick.AddListener(() => buttonLevel.URl("http://odysseus.culture.gr/h/1/gh151.jsp?obj_id=3473"));
         if (pnlHelp.activeSelf) CloseHelpPanel();
@@ -1120,9 +1097,8 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
     //when in mobile, we have extra panel to play sounds that appear on top of the changed values
     public void OpenPlayPanel()
     {
-#if PLATFORM_ANDROID || PLATFORM_IOS
+
         ms.pnlSound.SetActive(true);
-#endif
         pnlBottom.gameObject.SetActive(false);
     }
 
@@ -1163,9 +1139,8 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
     {
         btnSubmit.gameObject.SetActive(false);
         btnReset.gameObject.SetActive(false);
-        
         btnMoreInfo.gameObject.SetActive(true);
-
+        btnChangeValue.gameObject.SetActive(true);
     }
 
     //load instrument scriptable obkects from resources
@@ -1181,7 +1156,7 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
     //load clips from resources folder when not on webgl
     public void LoadClips(string filename)
     {
-#if !PLATFORM_WEBGL
+
         videoClip = Resources.LoadAll(filename, typeof(VideoClip)).Cast<VideoClip>().ToArray();
         for (int i = 0; i < videoClip.Length; i++)
         {
@@ -1189,60 +1164,12 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
             textureVideos[i].GetComponentInChildren<TextMeshProUGUI>().text = videoClip[i].name;
             if (videoClip.Length != textureVideos.Length) textureVideos[i + 1].SetActive(false);
         }
-#endif
+
         videoPlayer.time = 0;
     }
 
-    //when in webgl platform, to load files from urls. VideoClips won;t work correctly and thus the previous method won't work on webgl.
-#if PLATFORM_WEBGL
-    void LoadMuseumVideos(string aVideo,string bVideo)
-    {
-        
-        for (int i = 0; i < textureVideos.Length; i++)
-        {
-
-            if (bVideo != string.Empty)
-            {
-                videoPlayer.url = aVideo;
-                videoPlayer.url = bVideo;
-
-                textureVideos[i].SetActive(true);
-                string newName = aVideo.Split(new string[] { "/" }, System.StringSplitOptions.RemoveEmptyEntries)[3];
-                string nameNoextension = Path.GetFileNameWithoutExtension(newName.Replace("_", " "));
-
-                textureVideos[0].GetComponentInChildren<TextMeshProUGUI>().text = aVideo.Replace(aVideo, nameNoextension);
-                textureVideos[0].GetComponent<Button>().onClick.AddListener(() => PlayVideoWeb(aVideo));
-
-                string newName1 = bVideo.Split(new string[] { "/" }, System.StringSplitOptions.RemoveEmptyEntries)[3];
-                string nameNoextension1 = Path.GetFileNameWithoutExtension(newName1.Replace("_", " "));
-
-                textureVideos[1].GetComponentInChildren<TextMeshProUGUI>().text = bVideo.Replace(bVideo, nameNoextension1);
-                textureVideos[1].GetComponent<Button>().onClick.AddListener(() => PlayVideoWeb(bVideo));
-                Debug.Log("1st vd: " + aVideo + " 2nd vd: " + bVideo);
-            }
-            else if(isDafnis|| isLyra || isTrigono || isMegarwnH64 || isMegarwnH65 || isMegarwnL64 || isMegarwnL65)
-            {
-                videoPlayer.url = aVideo;
-                bVideo = string.Empty;
-
-                string newName = aVideo.Split(new string[] { "/" }, System.StringSplitOptions.RemoveEmptyEntries)[3];
-                string nameNoextension = Path.GetFileNameWithoutExtension(newName.Replace("_", " "));
-
-                textureVideos[0].GetComponentInChildren<TextMeshProUGUI>().text = aVideo.Replace(aVideo, nameNoextension);
-                textureVideos[0].GetComponent<Button>().onClick.AddListener(() => PlayVideoWeb(aVideo));
-                textureVideos[1].SetActive(false);
-
-                Debug.Log("on else meg: "+isMegara+" pir "+isPiraeus);
-            }
-            videoPlayer.time = 0;
-        }
-        //Debug.Log("Second for " + nameNoextension+ " 1st button " + textureVideos[0].GetComponentInChildren<TextMeshProUGUI>().text+" 2nd btn: "+ textureVideos[1].GetComponentInChildren<TextMeshProUGUI>().text);
-
-    }
-#endif
-
     //when platform except webgl to play specific video (we use the same way as the sounds here. This method is public cause we assign it on each button from editor)
-#if !PLATFORM_WEBGL
+
     public void PlayVideo(int num)
     {
         videoPlayer.clip = videoClip[num];
@@ -1262,40 +1189,7 @@ imgContainerStringInstrument.GetComponent<Image>().sprite = imgHelys;
         Debug.Log("Num: " + num);
 
     }
-#endif
 
-    //on webgl we can't use the previous method, cause we want to access the url. This method is assigned on each buttn from code.
-#if PLATFORM_WEBGL
-    public void PlayVideoWeb(string url)
-    {
-        videoPlayer.url = url;
-        
-        videoPlayer.Prepare();
-
-
-        pnlMainRawVideo.SetActive(true);
-
-        if (!videoPlayer.isPrepared)
-        {
-           
-            Debug.Log("preparing...");
-           
-        }
-        else videoPlayer.Play();
-
-        if (videoPlayer.isPlaying)
-        {
-            
-            videoPlayer.Pause();
-        }
-        else
-        {
-           
-            videoPlayer.Play();
-        }
-        
-    }
-#endif
 
     //this method works only on video, when we tap on it to pause or play the video.
     public void PlayPauseVideo()
