@@ -194,7 +194,7 @@ public class WindManager : MonoBehaviour
                     return;
                 }
             }
-            if (!mpm.isDafnis && !mpm.isMegarwnH64 && mpm.isMegarwnL64 || mpm.isMegarwnH65 || mpm.isMegarwnL65 && !mpm.isMegarwnL65)
+            if (!mpm.isDafnis && !mpm.isMegarwnH64 && mpm.isMegarwnL64 || mpm.isMegarwnH65 || mpm.isMegarwnL65)
             {
                 if (i == num + 8)
                 {
@@ -231,7 +231,7 @@ public class WindManager : MonoBehaviour
         //OptionValue();
         foreach (Toggle toggle in togglesChangedInput) toggle.isOn = false;
         CloseListOfGameObjects();
-
+        btnHolesChange.gameObject.SetActive(true);
         for (int k = 0; k < inputValueDistanceHole.Length; k++)
         {
             inputValueDistanceHole[k].gameObject.SetActive(true);
@@ -239,6 +239,7 @@ public class WindManager : MonoBehaviour
         }
         if (mpm.hasSelected) pnlChooseType.SetActive(false);
         if (mpm.pnlExtraMenu.activeSelf) mpm.CloseMenuPanel();
+        Debug.Log("Tonikes opes?");
     }
 
     #endregion
@@ -407,7 +408,10 @@ public class WindManager : MonoBehaviour
             {
                 inputValueDistanceHole[j].gameObject.SetActive(true);
             }
-            
+            mpm.imgDafnis.SetActive(false);
+            mpm.imgMegarwnH.SetActive(false);
+            mpm.imgMegarwnL.SetActive(true);
+            mpm.imgHoleExplain.SetActive(true);
             LoadDropDowns();
 
             mpm.btn3DScene.gameObject.SetActive(true);
@@ -429,8 +433,8 @@ public class WindManager : MonoBehaviour
                 inputValueDistanceHole[j].gameObject.SetActive(true);
             }
             mpm.imgDafnis.SetActive(false);
-            mpm.imgMegarwnH.SetActive(true);
-            mpm.imgMegarwnL.SetActive(false);
+            mpm.imgMegarwnH.SetActive(false);
+            mpm.imgMegarwnL.SetActive(true);
             mpm.imgHoleExplain.SetActive(true);
             LoadDropDowns();
 
@@ -466,9 +470,9 @@ public class WindManager : MonoBehaviour
                 inputValueDistanceHole[inputValueDistanceHole.Length - 2].gameObject.SetActive(false);
             }
 
-            /*mpm.imgDafnis.SetActive(true);
+            mpm.imgDafnis.SetActive(true);
             mpm.imgMegarwnH.SetActive(false);
-            mpm.imgMegarwnL.SetActive(false);*/
+            mpm.imgMegarwnL.SetActive(false);
             mpm.windInsMeg64H3D.SetActive(false);
             mpm.imgHoleExplain.SetActive(true);
             LoadDropDowns();
@@ -613,12 +617,13 @@ public class WindManager : MonoBehaviour
             }
             else if (mpm.isMegarwnH65)
             {
-                row.folder = grid[1927][8];
+                row.folder = grid[1926][8];
                 mpm.myAudio.LoadAudio(row.folder + "/");
             }
             else if (mpm.isMegarwnL65)
             {
-                row.folder = grid[2510][8];
+                /*row.folder = grid[2510][8];*/
+                row.folder = grid[2538][8];
                 mpm.myAudio.LoadAudio(row.folder + "/");
             }
             for (int j = 0; j < distanceInputs.Length - 6; j++)
@@ -648,12 +653,13 @@ public class WindManager : MonoBehaviour
             }
             else if (mpm.isMegarwnH65)
             {
-                row.folder = grid[1936][8];
+                row.folder = grid[1935][8];
                 mpm.myAudio.LoadAudio(row.folder + "/");
             }
             else if (mpm.isMegarwnL65)
             {
-                row.folder = grid[2518][8];
+                /*row.folder = grid[2518][8];*/
+                row.folder = grid[2547][8];
                 mpm.myAudio.LoadAudio(row.folder + "/");
             }
 
@@ -686,12 +692,13 @@ public class WindManager : MonoBehaviour
             }
             else if (mpm.isMegarwnH65)
             {
-                row.folder = grid[1945][8];
+                row.folder = grid[1944][8];
                 mpm.myAudio.LoadAudio(row.folder + "/");
             }
             else if (mpm.isMegarwnL65)
             {
-                row.folder = grid[2526][8];
+                /*row.folder = grid[2526][8];*/
+                row.folder = grid[2556][8];
                 mpm.myAudio.LoadAudio(row.folder + "/");
             }
             
@@ -737,12 +744,13 @@ public class WindManager : MonoBehaviour
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && mpm.isMegarwnL64 && !mpm.isMegarwnL65 && !mpm.isMegarwnH65)
                 OpenValues(585);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && mpm.isMegarwnL65 && !mpm.isMegarwnH65)
-                OpenValues(2309);
+                /*OpenValues(2309);*/
+                OpenValues(2349);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && mpm.isMegarwnH65)
                 OpenValues(1738);
             Debug.Log("No default values");
             
-            btnHolesChange.interactable = false;
+            //btnHolesChange.interactable = false;
             CloseListOfGameObjects();
 
             return true;
@@ -756,11 +764,12 @@ public class WindManager : MonoBehaviour
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && mpm.isMegarwnL64 && !mpm.isMegarwnL65 && !mpm.isMegarwnH65)
                 OpenValues(549);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && mpm.isMegarwnL65 && !mpm.isMegarwnH65)
-                OpenValues(2341);
+                /*OpenValues(2341);*/
+                OpenValues(2313);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && mpm.isMegarwnH65)
                 OpenValues(1701);
 
-            btnHolesChange.interactable = false;
+            //btnHolesChange.interactable = false;
             CloseListOfGameObjects();
             return true;
         }
@@ -773,11 +782,12 @@ public class WindManager : MonoBehaviour
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && mpm.isMegarwnL64 && !mpm.isMegarwnL65 && !mpm.isMegarwnH65)
                 OpenValues(513);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && mpm.isMegarwnL65 && !mpm.isMegarwnH65)
-                OpenValues(2373);
+                /* OpenValues(2373);*/
+                OpenValues(2385);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && mpm.isMegarwnH65)
                 OpenValues(1845);
 
-            btnHolesChange.interactable = false;
+            //btnHolesChange.interactable = false;
             CloseListOfGameObjects();
             return true;
         }
@@ -790,11 +800,12 @@ public class WindManager : MonoBehaviour
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && mpm.isMegarwnL64 && !mpm.isMegarwnL65 && !mpm.isMegarwnH65)
                 OpenValues(621);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && mpm.isMegarwnL65 && !mpm.isMegarwnH65)
-                OpenValues(2405);
+                /*OpenValues(2405);*/
+                OpenValues(2421);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && mpm.isMegarwnH65)
                 OpenValues(1773);
 
-            btnHolesChange.interactable = false;
+            //btnHolesChange.interactable = false;
             CloseListOfGameObjects();
             return true;
         }
@@ -807,11 +818,11 @@ public class WindManager : MonoBehaviour
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && mpm.isMegarwnL64 && !mpm.isMegarwnL65 && !mpm.isMegarwnH65)
                 OpenValues(657);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && mpm.isMegarwnL65 && !mpm.isMegarwnH65)
-                OpenValues(2437);
+                /*OpenValues(2437)*/OpenValues(2457);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && mpm.isMegarwnH65)
                 OpenValues(1809);
 
-            btnHolesChange.interactable = false;
+            //btnHolesChange.interactable = false;
             CloseListOfGameObjects();
             return true;
         }
@@ -824,11 +835,12 @@ public class WindManager : MonoBehaviour
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && mpm.isMegarwnL64 && !mpm.isMegarwnL65 && !mpm.isMegarwnH65)
                 OpenValues(693);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && mpm.isMegarwnL65 && !mpm.isMegarwnH65)
-                OpenValues(2469);
+                /*OpenValues(2469);*/
+                OpenValues(2493);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && mpm.isMegarwnH65)
                 OpenValues(1881);
 
-            btnHolesChange.interactable = false;
+            //btnHolesChange.interactable = false;
             CloseListOfGameObjects();
             return true;
         }
@@ -946,25 +958,25 @@ public class WindManager : MonoBehaviour
             }
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && mpm.isMegarwnL65 && !mpm.isMegarwnH65)
             {
-                if (grid[k][0] == grid[2510][0] && grid[k][1] == grid[2510][1] && grid[k][5] != grid[2510][5])
+                if (grid[k][0] == grid[2538][0] && grid[k][1] == grid[2538][1] && grid[k][5] != grid[2538][5])
                 {
                     for (int i = 0; i < inputValueDistanceHole.Length; i++)
                     {
-                        inputValueDistanceHole[i].text = grid[2510 + i][5];
+                        inputValueDistanceHole[i].text = grid[2539 + i][5];
                     }
                 }
-                if (grid[k][0] == grid[2518][0] && grid[k][1] == grid[2518][1] && grid[k][5] != grid[2518][5])
+                if (grid[k][0] == grid[2547][0] && grid[k][1] == grid[2547][1] && grid[k][5] != grid[2547][5])
                 {
-                    for (int i = 0; i < distanceInputs.Length - 7; i++)
+                    for (int i = 0; i < distanceInputs.Length - 8; i++)
                     {
-                        distanceInputs[i].text = grid[2518 + i][5];
+                        distanceInputs[i].text = grid[2548 + i][5];
                     }
                 }
-                if (grid[k][0] == grid[2525][0] && grid[k][1] == grid[2525][1] && grid[k][5] != grid[2525][5])
+                if (grid[k][0] == grid[2556][0] && grid[k][1] == grid[2556][1] && grid[k][5] != grid[2556][5])
                 {
-                    for (int i = 0; i < distanceInputs.Length - 7; i++)
+                    for (int i = 0; i < distanceInputs.Length - 8; i++)
                     {
-                        distanceInputs[i + 7].text = grid[2525 + i][5];
+                        distanceInputs[i + 8].text = grid[2557 + i][5];
                     }
                 }
                 if (grid[k][0] == grid[2277][0] && grid[k][1] == grid[2277][1] && grid[k][5] != grid[2277][5])
@@ -1395,7 +1407,7 @@ public class WindManager : MonoBehaviour
                         myText.color = new Color32(0, 0, 0, 255);
                     }
                 }
-                for (int j = 0; j < distanceInputs.Length - 7; j++)
+                for (int j = 0; j < distanceInputs.Length - 8; j++)
                 {
                     foreach (TextMeshProUGUI myText in distanceInputs[j].GetComponentsInChildren<TextMeshProUGUI>())
                     {
@@ -1403,9 +1415,9 @@ public class WindManager : MonoBehaviour
 
                     }
                 }
-                for (int k = 0; k < distanceInputs.Length - 7; k++)
+                for (int k = 0; k < distanceInputs.Length - 8; k++)
                 {
-                    foreach (TextMeshProUGUI myText in distanceInputs[k + 7].GetComponentsInChildren<TextMeshProUGUI>())
+                    foreach (TextMeshProUGUI myText in distanceInputs[k + 8].GetComponentsInChildren<TextMeshProUGUI>())
                     {
                         myText.color = new Color32(159, 159, 159, 255);
 
@@ -1534,6 +1546,7 @@ public class WindManager : MonoBehaviour
         txtBoreValueParent.gameObject.SetActive(false);
         txtMouthpieceValueParent.gameObject.SetActive(false);
 
+        if (pnlChangeValuesScreen.activeSelf) pnlChooseType.SetActive(false);
         pnlChooseType.SetActive(true);
        
 
