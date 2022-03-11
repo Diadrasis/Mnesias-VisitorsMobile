@@ -28,12 +28,7 @@ public class MainPCManager : MonoBehaviour
     public GameObject pnlInstrumentMiddleScreen;
     public GameObject pnlNavigateButtons;
     public Button btnNext;
-    public Button btnPrevious;
-#if !PLATFORM_ANDROID && !PLATFORM_IOS
-    public GameObject imgContainerStringInstrument;
-    public GameObject imgContainerWindIstrument;
-#endif
-
+    public Button btnPrevious;    
     public TextMeshProUGUI txtInstrument;
     public Button btnBackToMain;
     public GameObject pnlMuseumScreen;
@@ -235,11 +230,10 @@ public class MainPCManager : MonoBehaviour
 
         btnMoreInfo.onClick.AddListener(OpenMoreInfoPanel);
 
-#if PLATFORM_ANDROID || PLATFORM_IOS
+
         ms.btnPlayPanel.onClick.AddListener(OpenPlayPanel);
         ms.btnClosePlayPanel.onClick.AddListener(ClosePanels);
 
-#endif
     }
 
 #region Panels
@@ -259,6 +253,10 @@ public class MainPCManager : MonoBehaviour
         imgMnesiasBack.gameObject.SetActive(true);
         wm.isBack = false;
 
+        imgWindContainer.SetActive(true);
+        imgStringContainer.SetActive(false);
+
+
         btn3DScene.gameObject.SetActive(true);
         btn3DScene.onClick.RemoveAllListeners();
 
@@ -267,12 +265,6 @@ public class MainPCManager : MonoBehaviour
             txtInstrument.gameObject.SetActive(true);
             txtInstrument.text = "> " + btnAulosDafnis.GetComponentInChildren<TextMeshProUGUI>().text;
             wm.btnBarrytone.interactable = false;
-
-            /*windInsDafnis3D.SetActive(true);
-            windInsMeg64H3D.SetActive(false);
-            windInsMeg64L3D.SetActive(false);
-            windInsMeg65H3D.SetActive(false);
-            windInsMeg65L3D.SetActive(false);*/
 
             
             imgWindContainer.GetComponent<Image>().sprite = imgWindDafnis;
@@ -286,22 +278,7 @@ public class MainPCManager : MonoBehaviour
             txtInstrument.text = "> " + btnAulosMegara64.GetComponentInChildren<TextMeshProUGUI>().text;
             wm.btnBarrytone.interactable = true;
 
-            /*windInsDafnis3D.SetActive(false);
-            if (isMegarwnH64)
-            {
-                windInsMeg64H3D.SetActive(true);
-                btn3DScene.onClick.AddListener(() => wm.Load3DIns(windInsMeg64H3D));
-            }
-            else
-            {
-                windInsMeg64L3D.SetActive(true);
-                btn3DScene.onClick.AddListener(() => wm.Load3DIns(windInsMeg64L3D));
-            }
-           
             
-            windInsMeg65H3D.SetActive(false);
-            windInsMeg65L3D.SetActive(false);*/
-
 
             LoadClips("megarwnH64/");
             imgWindContainer.GetComponent<Image>().sprite = imgWindMegarwn64H;
@@ -312,20 +289,6 @@ public class MainPCManager : MonoBehaviour
             txtInstrument.text = "> " + btnAulosMegara65.GetComponentInChildren<TextMeshProUGUI>().text;
             wm.btnBarrytone.interactable = true;
 
-            
-            /*windInsDafnis3D.SetActive(false);
-            windInsMeg64H3D.SetActive(false);
-            windInsMeg64L3D.SetActive(false);
-            if (isMegarwnH65)
-            {
-                windInsMeg65H3D.SetActive(true);
-                btn3DScene.onClick.AddListener(() => wm.Load3DIns(windInsMeg65H3D));
-            }
-            else
-            {
-                windInsMeg65L3D.SetActive(true);
-                btn3DScene.onClick.AddListener(() => wm.Load3DIns(windInsMeg65L3D));
-            }*/
 
             imgWindContainer.GetComponent<Image>().sprite = imgWindMegarwn65H;
         }
@@ -373,6 +336,9 @@ public class MainPCManager : MonoBehaviour
 
         btnSubmit.onClick.AddListener(sm.OnSubmitString);
         btnChangeValue.onClick.AddListener(sm.OpenChangeValuesPanelString);
+
+        imgWindContainer.SetActive(false);
+        imgStringContainer.SetActive(true);
 
         if (isTrigono && !isLyra)
         {
@@ -516,7 +482,7 @@ public class MainPCManager : MonoBehaviour
 
                 btnExtraMenu.gameObject.SetActive(true);
                 separate.SetActive(true);
-                //btn3DScene.gameObject.SetActive(true);
+                
             }
 
             Debug.Log("6");

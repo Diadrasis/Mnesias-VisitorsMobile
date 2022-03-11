@@ -44,7 +44,7 @@ public class StringManager : MonoBehaviour
     public Toggle[] togglesLengthInput; //the toggles for set1 and set2 for length
     public Toggle[] togglesDensityInput;//the toggles for set1 and set2 for density
     public Toggle[] togglesTensionInput;//the toggles for set1 and set2 for tension
-
+    public GameObject[] btnSoundsIns;// when in change values the objects should be closed
 
     public ToggleGroup group;
 
@@ -175,6 +175,7 @@ public class StringManager : MonoBehaviour
         mpm.pnlBottom.SetActive(false);
         if (mpm.pnlExtraMenu.activeSelf) mpm.CloseMenuPanel();
         OnResetString();
+        foreach (GameObject btnGamePlay in btnSoundsIns) btnGamePlay.SetActive(false);
     }
 
     #endregion
@@ -314,9 +315,8 @@ public class StringManager : MonoBehaviour
         }
         ShowLenghtExtraValues();
         mpm.pnlBottom.SetActive(true);
-#if PLATFROM_ANDROID || PLATFROM_IOS
         mpm.ms.btnPlayPanel.gameObject.SetActive(false);
-#endif
+
         mpm.btnChangeValue.gameObject.SetActive(false);
     }
 
@@ -383,9 +383,8 @@ public class StringManager : MonoBehaviour
             }
         }
         mpm.pnlBottom.SetActive(true);
-#if PLATFROM_ANDROID || PLATFROM_IOS
         mpm.ms.btnPlayPanel.gameObject.SetActive(false);
-#endif
+
         ShowDensityExtraValues();
         mpm.btnChangeValue.gameObject.SetActive(false);
     }
@@ -450,9 +449,8 @@ public class StringManager : MonoBehaviour
             }
         }
         mpm.pnlBottom.SetActive(true);
-#if PLATFROM_ANDROID || PLATFROM_IOS
         mpm.ms.btnPlayPanel.gameObject.SetActive(false);
-#endif
+
         ShowTensionExtraValues();
         mpm.btnChangeValue.gameObject.SetActive(false);
     }
@@ -625,7 +623,7 @@ public class StringManager : MonoBehaviour
             togglesTensionInput[i].gameObject.SetActive(false);
         }
         RemoveTextEffect();
-        
+        foreach (GameObject btnGamePlay in btnSoundsIns) btnGamePlay.SetActive(true);
         mpm.btnChangeValue.gameObject.SetActive(true);
         Debug.Log("Submit press");
     }

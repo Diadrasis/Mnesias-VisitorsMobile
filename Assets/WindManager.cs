@@ -239,7 +239,7 @@ public class WindManager : MonoBehaviour
         }
         if (mpm.hasSelected) pnlChooseType.SetActive(false);
         if (mpm.pnlExtraMenu.activeSelf) mpm.CloseMenuPanel();
-        Debug.Log("Tonikes opes?");
+        mpm.ms.btnPlayPanel.gameObject.SetActive(false);
     }
 
     #endregion
@@ -715,7 +715,7 @@ public class WindManager : MonoBehaviour
 
         RemoveEffect();
         mpm.btnChangeValue.gameObject.SetActive(true);
-        
+        mpm.ms.btnPlayPanel.gameObject.SetActive(true);
     }
 
     //check the dropdowns and which pairs can have an audio for all wind instruments
@@ -727,10 +727,7 @@ public class WindManager : MonoBehaviour
         {
             Debug.Log("Option Value + default values");
             mpm.btn3DScene.gameObject.SetActive(true);
-           /* if (mpm.isDafnis) OpenValues(85);
-            else*/ ShowHoleExtraValues();
-            //HoleSelection();
-
+            ShowHoleExtraValues();
             btnHolesChange.interactable = true;
            
             return true;
@@ -750,7 +747,7 @@ public class WindManager : MonoBehaviour
                 OpenValues(1738);
             Debug.Log("No default values");
             
-            //btnHolesChange.interactable = false;
+            
             CloseListOfGameObjects();
 
             return true;
@@ -769,7 +766,7 @@ public class WindManager : MonoBehaviour
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && mpm.isMegarwnH65)
                 OpenValues(1701);
 
-            //btnHolesChange.interactable = false;
+            
             CloseListOfGameObjects();
             return true;
         }
@@ -787,7 +784,7 @@ public class WindManager : MonoBehaviour
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && mpm.isMegarwnH65)
                 OpenValues(1845);
 
-            //btnHolesChange.interactable = false;
+            
             CloseListOfGameObjects();
             return true;
         }
@@ -805,7 +802,7 @@ public class WindManager : MonoBehaviour
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && mpm.isMegarwnH65)
                 OpenValues(1773);
 
-            //btnHolesChange.interactable = false;
+            
             CloseListOfGameObjects();
             return true;
         }
@@ -822,7 +819,6 @@ public class WindManager : MonoBehaviour
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && mpm.isMegarwnH65)
                 OpenValues(1809);
 
-            //btnHolesChange.interactable = false;
             CloseListOfGameObjects();
             return true;
         }
@@ -839,8 +835,6 @@ public class WindManager : MonoBehaviour
                 OpenValues(2493);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && mpm.isMegarwnH65)
                 OpenValues(1881);
-
-            //btnHolesChange.interactable = false;
             CloseListOfGameObjects();
             return true;
         }
