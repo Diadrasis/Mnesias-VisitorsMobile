@@ -957,29 +957,29 @@ public class WindManager : MonoBehaviour
                 {
                     for (int i = 0; i < inputValueDistanceHole.Length; i++)
                     {
-                        inputValueDistanceHole[i].text = grid[2539 + i][5];
+                        inputValueDistanceHole[i].text = grid[2538 + i][5];
                     }
                 }
                 if (grid[k][0] == grid[2547][0] && grid[k][1] == grid[2547][1] && grid[k][5] != grid[2547][5])
                 {
                     for (int i = 0; i < distanceInputs.Length - 8; i++)
                     {
-                        distanceInputs[i].text = grid[2548 + i][5];
+                        distanceInputs[i].text = grid[2547 + i][5];
                     }
                 }
                 if (grid[k][0] == grid[2556][0] && grid[k][1] == grid[2556][1] && grid[k][5] != grid[2556][5])
                 {
                     for (int i = 0; i < distanceInputs.Length - 8; i++)
                     {
-                        distanceInputs[i + 8].text = grid[2557 + i][5];
+                        distanceInputs[i + 8].text = grid[2556 + i][5];
                     }
                 }
                 if (grid[k][0] == grid[2277][0] && grid[k][1] == grid[2277][1] && grid[k][5] != grid[2277][5])
                 {
                     for (int i = 0; i < inputValueDistanceHole.Length; i++)
                     {
-                        inputValueDistanceHole[i].text = grid[2278 + i][5];
-                        inputValueDiameterHole[i].text = grid[2278 + i][6];
+                        inputValueDistanceHole[i].text = grid[2277 + i][5];
+                        inputValueDiameterHole[i].text = grid[2277 + i][6];
                     }
                 }
             }
@@ -1541,7 +1541,6 @@ public class WindManager : MonoBehaviour
         txtBoreValueParent.gameObject.SetActive(false);
         txtMouthpieceValueParent.gameObject.SetActive(false);
 
-        if (pnlChangeValuesScreen.activeSelf) pnlChooseType.SetActive(false);
         pnlChooseType.SetActive(true);
        
 

@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Diadrasis/_Scenes/MobileScenes/SplashMobile.unity
+    path: Assets/MainProjectFolder/_Scenes/MobileScenes/SplashMobile.unity
     guid: 373c4bcb1a1b3994c82fca7fda2ac4a4
   - enabled: 1
-    path: Assets/Diadrasis/_Scenes/MobileScenes/MainSceneMobile.unity
+    path: Assets/MainProjectFolder/_Scenes/MobileScenes/MainSceneMobile.unity
     guid: 208bed5ac08200142851ea1289db27f5
   - enabled: 1
-    path: Assets/Diadrasis/_Scenes/MobileScenes/UICreditsMobile.unity
+    path: Assets/MainProjectFolder/_Scenes/MobileScenes/UICreditsMobile.unity
     guid: 74a1c8a2cce183040bc1f1ef0c39a85e
   m_configObjects: {}

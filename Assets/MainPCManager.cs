@@ -31,8 +31,6 @@ public class MainPCManager : MonoBehaviour
     public Button btnPrevious;    
     public TextMeshProUGUI txtInstrument;
     public Button btnBackToMain;
-    public Sprite spBack;
-    public Sprite spHome;
     public GameObject pnlMuseumScreen;
     public Button btnMuseumPiraeus, btnMuseumMegara;
     public TextMeshProUGUI txtMuseumName;
@@ -215,8 +213,7 @@ public class MainPCManager : MonoBehaviour
 
         btnPrevious.onClick.AddListener(BackPanels);
         btnHelp.onClick.AddListener(OpenHelpPanel);
-
-        btnBackToMain.GetComponentInChildren<Image>().sprite = spHome;
+        
         btnBackToMain.onClick.AddListener(ClosePanels);
 
         btnCloseWind.onClick.AddListener(ClosePanels);
@@ -755,8 +752,6 @@ public class MainPCManager : MonoBehaviour
         for (int i = 0; i < instrument.Length; i++)
         {
             txtInstrument.gameObject.SetActive(true);
-
-
             ms.txtTitleInstrument.gameObject.SetActive(true);
 
             if (instrument[i].nameInstrument.Contains(btnAulosMegara64.GetComponentInChildren<TextMeshProUGUI>().text))
@@ -766,7 +761,6 @@ public class MainPCManager : MonoBehaviour
                 imgContainer.GetComponent<Image>().sprite = instrument[i].imgInstrument;
                 txtMainTextInstrument.text = instrument[i].mainText;
                 txtCaptionInstrument.text = instrument[i].txtUnderImage;
-
                 ms.txtTitleInstrument.text = instrument[i].nameInstrument;
             }
 
