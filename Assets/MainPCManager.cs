@@ -31,6 +31,8 @@ public class MainPCManager : MonoBehaviour
     public Button btnPrevious;    
     public TextMeshProUGUI txtInstrument;
     public Button btnBackToMain;
+    public Sprite spBack;
+    public Sprite spHome;
     public GameObject pnlMuseumScreen;
     public Button btnMuseumPiraeus, btnMuseumMegara;
     public TextMeshProUGUI txtMuseumName;
@@ -140,7 +142,6 @@ public class MainPCManager : MonoBehaviour
     private void Awake()
     {
         pnlMainWindInstrument.SetActive(false);
-        pnlMuseumScreen.SetActive(true);
         prefab3Dins.SetActive(false);
         btnExtraMenu.gameObject.SetActive(false);
         separate.SetActive(false);
@@ -152,7 +153,7 @@ public class MainPCManager : MonoBehaviour
         imgStringContainer.gameObject.SetActive(false);
         txtInstrument.gameObject.SetActive(false);
 
-        ClosedPanelsGO(false, false, false, false, false, false);
+        ClosedPanelsGO(true,false, false, false, false, false, false,false);
         myAudio = FindObjectOfType<DatabaseAudio>();
         btnSubmit.gameObject.SetActive(false);
         btnReset.gameObject.SetActive(false);
@@ -164,6 +165,8 @@ public class MainPCManager : MonoBehaviour
         pnlWarning.SetActive(false);
 
         imgMnesiasBack.gameObject.SetActive(true);
+        btnPrevious.gameObject.SetActive(false);
+
 
         btnCloseWarning.onClick.AddListener(ClosePanels);
         windInsDafnis3D.SetActive(false);
@@ -212,7 +215,9 @@ public class MainPCManager : MonoBehaviour
 
         btnPrevious.onClick.AddListener(BackPanels);
         btnHelp.onClick.AddListener(OpenHelpPanel);
-        btnBackToMain.onClick.AddListener(BackPanels);
+
+        btnBackToMain.GetComponentInChildren<Image>().sprite = spHome;
+        btnBackToMain.onClick.AddListener(ClosePanels);
 
         btnCloseWind.onClick.AddListener(ClosePanels);
         btnCloseString.onClick.AddListener(ClosePanels);
@@ -245,7 +250,8 @@ public class MainPCManager : MonoBehaviour
         btnExtraMenu.gameObject.SetActive(true);
         separate.SetActive(true);
         
-        ClosedPanelsGO(false, false, false, false, false, false);
+
+        ClosedPanelsGO(false,false, false, false, false, false, false,false);
         pnlWindScreen.SetActive(true);
         pnlStringScreen.SetActive(false);
         pnlMainWindInstrument.SetActive(true);
@@ -313,8 +319,9 @@ public class MainPCManager : MonoBehaviour
 
         btnExtraMenu.gameObject.SetActive(true);
         separate.SetActive(true);
+
         btn3DScene.gameObject.SetActive(true);
-        ClosedPanelsGO(false, false, false, false, false, true);
+        ClosedPanelsGO(false,false, false, false, false, false, true,false);
         pnlWindScreen.SetActive(false);
         pnlStringScreen.SetActive(true);
         pnlMainWindInstrument.SetActive(false);
@@ -383,7 +390,7 @@ public class MainPCManager : MonoBehaviour
     private void BackPanels()
     {
         imgMnesiasBack.gameObject.SetActive(true);
-        if (pnlMainWindInstrument.activeSelf)
+        /*if (pnlMainWindInstrument.activeSelf)
         {
             if (pnlExtraInfo.activeSelf)
             {
@@ -454,8 +461,8 @@ public class MainPCManager : MonoBehaviour
             }
 
             Debug.Log("4");
-        }
-        else if (prefab3Dins.activeSelf)
+        }*/
+        if (prefab3Dins.activeSelf)
         {
             if (pnlExtraInfo.activeSelf)
             {
@@ -478,16 +485,16 @@ public class MainPCManager : MonoBehaviour
                     OpenStringMainScene();
                 }
 
-                ClosedPanelsGO(false, false, false, false, false, true);
+                ClosedPanelsGO(false,false, false, false, false, false, true,false);
 
                 btnExtraMenu.gameObject.SetActive(true);
                 separate.SetActive(true);
-                
+                btnBackToMain.gameObject.SetActive(true);
             }
 
             Debug.Log("6");
         }
-        else if (pnlInstrumentMiddleScreen.activeSelf)
+        /*else if (pnlInstrumentMiddleScreen.activeSelf)
         {
             btnExtraMenu.gameObject.SetActive(true);
             separate.SetActive(true);
@@ -527,7 +534,7 @@ public class MainPCManager : MonoBehaviour
             }
 
             Debug.Log("7");
-        }
+        }*/
 
 
         if (pnlHelp.activeSelf) CloseHelpPanel();
@@ -566,6 +573,101 @@ public class MainPCManager : MonoBehaviour
             ms.pnlSound.SetActive(false);
             pnlBottom.gameObject.SetActive(true);
         }
+        if (pnlMainWindInstrument.activeSelf)
+        {
+            pnlMainWindInstrument.SetActive(false);
+
+            wm.isBack = true;
+            wm.OnReset();
+            ClosedPanelsGO(true,false, false, true, false, false, false,false);
+            
+            pnlMainWindInstrument.SetActive(false);
+            pnlWindScreen.SetActive(false);
+            btnBackToMain.gameObject.SetActive(false);
+            btnExtraMenu.gameObject.SetActive(false);
+            separate.SetActive(false);
+            windInsDafnis3D.SetActive(false);
+            windInsMeg65H3D.SetActive(false);
+            windInsMeg64L3D.SetActive(false);
+            windInsMeg64H3D.SetActive(false);
+            windInsMeg65L3D.SetActive(false);
+            trigonoIns3D.SetActive(false);
+            LyraIns3D.SetActive(false);
+            separate.SetActive(false);
+
+            Debug.Log("1. isDafnis: " + isDafnis + " Megara: " + isMegara + " Piraeus; " + isPiraeus);
+        }
+        if (pnlPiraeusInstrument.activeSelf)
+        {
+            pnlPiraeusInstrument.SetActive(false);
+
+            btnBackToMain.gameObject.SetActive(false);
+            btnExtraMenu.gameObject.SetActive(false);
+            separate.SetActive(false);
+            ClosedPanelsGO(true,false, false, false, false, false, false,false);
+            txtInstrument.gameObject.SetActive(false);
+            txtMuseumName.text = "Επιλογη Μουσειου";
+
+            Debug.Log("2");
+        }
+        if (pnlMegaraInstrument.activeSelf)
+        {
+            pnlMegaraInstrument.SetActive(false);
+            
+                btnBackToMain.gameObject.SetActive(false);
+                btnExtraMenu.gameObject.SetActive(false);
+                separate.SetActive(false);
+                ClosedPanelsGO(true,false, false, false, false, false, false,false);
+                txtInstrument.gameObject.SetActive(false);
+                txtMuseumName.text = "Επιλογη Μουσειου";
+
+            Debug.Log("4");
+        }
+        if (prefab3Dins.activeSelf)
+        {
+            prefab3Dins.SetActive(false);
+
+            pnlMainWindInstrument.SetActive(false);
+            pnlMainStringInstrument.SetActive(false);
+            btnBackToMain.gameObject.SetActive(false);
+
+            ClosedPanelsGO(true,false, false, false, false, false, false,false);
+
+            btnExtraMenu.gameObject.SetActive(false);
+            separate.SetActive(false);
+
+        Debug.Log("6");
+        }
+        if (pnlInstrumentMiddleScreen.activeSelf)
+        {
+            btnExtraMenu.gameObject.SetActive(false);
+            btnBackToMain.gameObject.SetActive(false);
+            separate.SetActive(false);
+            btn3DScene.gameObject.SetActive(false);
+            ClosedPanelsGO(true, false, false, false, false, false, false,false);
+
+            txtInstrument.gameObject.SetActive(false);
+            Debug.Log("8. isDafnis: " + isDafnis + " Megara: " + isMegara + " Piraeus; " + isPiraeus);
+        }
+        else if (pnlMainStringInstrument.activeSelf)
+        {
+            pnlMainStringInstrument.SetActive(false);
+
+            sm.OnResetString();
+            if (isTrigono || isLyra) ClosedPanelsGO(true,false, false, false, false, false, false,false);
+
+            pnlMainStringInstrument.SetActive(false);
+            pnlStringScreen.SetActive(false);
+            btnExtraMenu.gameObject.SetActive(false);
+            separate.SetActive(false);
+            btnBackToMain.gameObject.SetActive(false);
+
+            Debug.Log("7");
+        }
+
+
+        if (pnlHelp.activeSelf) CloseHelpPanel();
+        if (pnlExtraMenu.activeSelf) CloseMenuPanel();
 
 
     }
@@ -580,7 +682,7 @@ public class MainPCManager : MonoBehaviour
     //when we open the aulos middle panel
     private void OpenPiraeusMiddleWindScene()
     {
-        ClosedPanelsGO(false, false, true, true, true, false);
+        ClosedPanelsGO(false,false, false, true, true, true, false,false);
 
         windInsDafnis3D.SetActive(false);
         windInsMeg65H3D.SetActive(false);
@@ -631,7 +733,7 @@ public class MainPCManager : MonoBehaviour
     //when we open the megara64
     private void OpenMegara64MiddleScene()
     {
-        ClosedPanelsGO(false, false, true, true, true, false);
+        ClosedPanelsGO(false,false, false, true, true, true, false,false);
         windInsDafnis3D.SetActive(false);
         windInsMeg65H3D.SetActive(false);
         windInsMeg65L3D.SetActive(false);
@@ -681,7 +783,7 @@ public class MainPCManager : MonoBehaviour
     private void OpenMegara65MiddleScene()
     {
         //btnBackToMain.gameObject.SetActive(false);
-        ClosedPanelsGO(false, false, true, true, true, false);
+        ClosedPanelsGO(false,false, false, true, true, true, false,false);
 
 
         windInsDafnis3D.SetActive(false);
@@ -737,7 +839,7 @@ public class MainPCManager : MonoBehaviour
     void OpenTrigonoMiddleScene()
     {
 
-        ClosedPanelsGO(false, false, true, true, true, false);
+        ClosedPanelsGO(false,false, false, true, true, true, false,false);
 
         isDafnis = false;
         isTrigono = true;
@@ -782,7 +884,7 @@ public class MainPCManager : MonoBehaviour
     void OpenHelysMiddleScene()
     {
 
-        ClosedPanelsGO(false, false, true, true, true, false);
+        ClosedPanelsGO(false,false, false, true, true, true, false,false);
         btnExtraMenu.gameObject.SetActive(false);
         separate.SetActive(false);
 
@@ -968,8 +1070,7 @@ public class MainPCManager : MonoBehaviour
         isMegarwnL64 = false;
         isMegarwnL65 = false;
 
-        ClosedPanelsGO(true, false, false, false, true, false);
-        pnlMuseumScreen.SetActive(false);
+        ClosedPanelsGO(false,true, false, false, false, true, false,false);
 
         txtMuseumName.text = btnMuseumPiraeus.GetComponentInChildren<TextMeshProUGUI>().text + " Πειραια";
         btnBackToMain.gameObject.SetActive(true);
@@ -1004,8 +1105,7 @@ public class MainPCManager : MonoBehaviour
         isMegarwnL64 = false;
         isMegarwnL65 = false;
 
-        ClosedPanelsGO(false, true, false, false, true, false);
-        pnlMuseumScreen.SetActive(false);
+        ClosedPanelsGO(false,false, true, false, false, true, false,false);
 
         txtMuseumName.text = btnMuseumMegara.GetComponentInChildren<TextMeshProUGUI>().text + " Μεγαρων";
         btnBackToMain.gameObject.SetActive(true);
@@ -1047,15 +1147,16 @@ public class MainPCManager : MonoBehaviour
     }
 
     //panels that are frequently used to open and close throughout the app, method to open and close them respectetly
-    public void ClosedPanelsGO(bool pnlPir, bool pnlMeg, bool pnlPirMS, bool navBtn, bool btnMus, bool btnBot)
+    public void ClosedPanelsGO(bool pnlMuseum,bool pnlPir, bool pnlMeg, bool pnlPirMS, bool navBtn, bool btnMus, bool btnBot, bool btnPre)
     {
+        pnlMuseumScreen.SetActive(pnlMuseum);
         pnlPiraeusInstrument.SetActive(pnlPir);
         pnlMegaraInstrument.SetActive(pnlMeg);
         pnlInstrumentMiddleScreen.SetActive(pnlPirMS);
         pnlBottom.SetActive(btnBot);
         pnlNavigateButtons.SetActive(navBtn);
         btnMuseum.gameObject.SetActive(btnMus);
-
+        btnPrevious.gameObject.SetActive(btnPre);
 
     }
 

@@ -462,7 +462,8 @@ public class StringManager : MonoBehaviour
         mpm.prefab3Dins.SetActive(true);
         mpm.pnlMainStringInstrument.SetActive(false);
         mpm.imgMnesiasBack.gameObject.SetActive(false);
-
+        mpm.btnPrevious.gameObject.SetActive(true);
+        mpm.btnBackToMain.gameObject.SetActive(false);
 
         if (mpm.pnlHelp.activeSelf) mpm.CloseHelpPanel();
         if (mpm.pnlExtraMenu.activeSelf)mpm.CloseMenuPanel();

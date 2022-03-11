@@ -323,7 +323,8 @@ public class WindManager : MonoBehaviour
         mpm.pnlMainWindInstrument.SetActive(false);
         mpm.pnlBottom.SetActive(false);
         mpm.imgMnesiasBack.gameObject.SetActive(false);
-        
+        mpm.btnPrevious.gameObject.SetActive(true);
+        mpm.btnBackToMain.gameObject.SetActive(false);
         if (mpm.pnlHelp.activeSelf) mpm.CloseHelpPanel();
         if (mpm.pnlExtraMenu.activeSelf) mpm.CloseMenuPanel();
     }
