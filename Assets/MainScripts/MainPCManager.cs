@@ -255,8 +255,7 @@ public class MainPCManager : MonoBehaviour
         pnlMainStringInstrument.SetActive(false);
         imgMnesiasBack.gameObject.SetActive(true);
         wm.isBack = false;
-
-        imgWindContainer.SetActive(true);
+        
         imgStringContainer.SetActive(false);
 
 
@@ -268,9 +267,6 @@ public class MainPCManager : MonoBehaviour
             txtInstrument.gameObject.SetActive(true);
             txtInstrument.text = "> " + btnAulosDafnis.GetComponentInChildren<TextMeshProUGUI>().text;
             wm.btnBarrytone.interactable = false;
-
-            
-            imgWindContainer.GetComponent<Image>().sprite = imgWindDafnis;
 
             LoadClips("dafnis/");
 
@@ -284,7 +280,6 @@ public class MainPCManager : MonoBehaviour
             
 
             LoadClips("megarwnH64/");
-            imgWindContainer.GetComponent<Image>().sprite = imgWindMegarwn64H;
         }
         else if (isMegarwnL65 || isMegarwnH65 && !isDafnis && !isMegarwnH64 && !isMegarwnL64)
         {
@@ -293,7 +288,6 @@ public class MainPCManager : MonoBehaviour
             wm.btnBarrytone.interactable = true;
 
 
-            imgWindContainer.GetComponent<Image>().sprite = imgWindMegarwn65H;
         }
 
         btnSubmit.onClick.AddListener(wm.OnSubmit);
