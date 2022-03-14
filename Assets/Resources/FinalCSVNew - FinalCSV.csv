@@ -139,13 +139,6 @@ mouthpiece,boreLength,boreDiameter,boreWeight,numberOfHoles,distanceHole,diamete
 "0,07","0,268","0,0115","0,004",6,"0,083","0,007",4,dafnis/dafnisL_TH_Minus,aulos_dafnisLMinusTH5
 "0,07","0,268","0,0115","0,004",6,"0,058","0,007",5,dafnis/dafnisL_TH_Minus,aulos_dafnisLMinusTH6
 "0,07","0,268","0,0115","0,004",6,"0,026","0,007",6,dafnis/dafnisL_TH_Minus,aulos_dafnisLMinusTH7
-"0,071","0,268","0,0115","0,004",6,0,0,0,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR1
-"0,071","0,268","0,0115","0,004",6,"0,164","0,007",1,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR2
-"0,071","0,268","0,0115","0,004",6,"0,1395","0,007",2,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR3
-"0,071","0,268","0,0115","0,004",6,"0,116","0,007",3,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR4
-"0,071","0,268","0,0115","0,004",6,"0,093","0,007",4,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR5
-"0,071","0,268","0,0115","0,004",6,"0,068","0,007",5,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR6
-"0,071","0,268","0,0115","0,004",6,"0,036","0,007",6,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR7
 "0,071","0,268","0,0115","0,004",6,1,0,0,,
 "0,071","0,268","0,0115","0,004",6,1,"0,007",1,,
 "0,071","0,268","0,0115","0,004",6,1,"0,007",2,,
@@ -153,6 +146,13 @@ mouthpiece,boreLength,boreDiameter,boreWeight,numberOfHoles,distanceHole,diamete
 "0,071","0,268","0,0115","0,004",6,1,"0,007",4,,
 "0,071","0,268","0,0115","0,004",6,1,"0,007",5,,
 "0,071","0,268","0,0115","0,004",6,1,"0,007",6,,
+"0,071","0,268","0,0115","0,004",6,0,0,0,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR1
+"0,071","0,268","0,0115","0,004",6,"0,164","0,007",1,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR2
+"0,071","0,268","0,0115","0,004",6,"0,1395","0,007",2,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR3
+"0,071","0,268","0,0115","0,004",6,"0,116","0,007",3,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR4
+"0,071","0,268","0,0115","0,004",6,"0,093","0,007",4,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR5
+"0,071","0,268","0,0115","0,004",6,"0,068","0,007",5,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR6
+"0,071","0,268","0,0115","0,004",6,"0,036","0,007",6,dafnis/dafnisL_R_Plusn,aulos_dafnisLPlusnR7
 "0,071","0,268","0,0115","0,004",6,2,0,0,,
 "0,071","0,268","0,0115","0,004",6,2,"0,007",1,,
 "0,071","0,268","0,0115","0,004",6,2,"0,007",2,,

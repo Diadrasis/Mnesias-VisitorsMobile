@@ -837,7 +837,7 @@ public class WindManager : MonoBehaviour
         else if (boreValue == 0 && mouthPieceValue == 3)
         {
             if (mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && !mpm.isMegarwnH65)
-                OpenValues(141);
+                OpenValues(149);
             else if (!mpm.isDafnis && mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && !mpm.isMegarwnH65)
                 OpenValues(1249);
             else if (!mpm.isDafnis && !mpm.isMegarwnH64 && mpm.isMegarwnL64 && !mpm.isMegarwnL65 && !mpm.isMegarwnH65)
@@ -871,8 +871,9 @@ public class WindManager : MonoBehaviour
                     for (int i = 0; i < inputValueDistanceHole.Length; i++)
                     {
                         inputValueDistanceHole[i].text = grid[135 + i][5];
+                        Debug.Log("folder: " + inputValueDistanceHole[i].text);
                     }
-                    Debug.Log("folder: "+ grid[135][5]);
+                    
                 }
                 if (grid[k][0] == grid[121][0] && grid[k][1] == grid[121][1] && grid[k][5] != grid[121][5])
                 {
@@ -892,7 +893,7 @@ public class WindManager : MonoBehaviour
                 {
                     for (int i = 0; i < inputValueDistanceHole.Length; i++)
                     {
-                        inputValueDistanceHole[i].text = grid[86 + i][5];
+                        //inputValueDistanceHole[i].text = grid[86 + i][5];
                         inputValueDiameterHole[i].text = grid[86 + i][6];
                     }
                 }

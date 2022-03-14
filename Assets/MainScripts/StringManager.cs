@@ -528,7 +528,7 @@ public class StringManager : MonoBehaviour
             {
                 lengthInputs[i].gameObject.SetActive(false);
             }
-            
+            //mpm.btn3DScene.gameObject.SetActive(false);
         }
 
         if (togglesTensionInput[0].isOn && mpm.isTrigono)
@@ -627,6 +627,7 @@ public class StringManager : MonoBehaviour
         foreach (GameObject btnGamePlay in btnSoundsIns) btnGamePlay.SetActive(true);
         mpm.btnChangeValue.gameObject.SetActive(true);
         Debug.Log("Submit press");
+        mpm.btn3DScene.gameObject.SetActive(false);
     }
 
     //is used on each toggle from the editor, when a toggle is selected (on) the text changes from gray to black.
