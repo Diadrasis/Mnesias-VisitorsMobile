@@ -614,7 +614,7 @@ public class WindManager : MonoBehaviour
         {
             if (mpm.isDafnis)
             {
-                row.folder = grid[121][8];
+                row.folder = grid[134][8];
                 mpm.myAudio.LoadAudio(row.folder + "/");
             }
             else if (mpm.isMegarwnH64)
@@ -650,7 +650,7 @@ public class WindManager : MonoBehaviour
         {
             if (mpm.isDafnis)
             {
-                row.folder = grid[128][8];
+                row.folder = grid[121][8];
                 mpm.myAudio.LoadAudio(row.folder + "/");
             }
             else if (mpm.isMegarwnH64)
@@ -689,7 +689,7 @@ public class WindManager : MonoBehaviour
         {
             if (mpm.isDafnis)
             {
-                row.folder = grid[135][8];
+                row.folder = grid[128][8];
                 mpm.myAudio.LoadAudio(row.folder + "/");
             }
             else if (mpm.isMegarwnH64)
@@ -866,25 +866,26 @@ public class WindManager : MonoBehaviour
         {
             if (mpm.isDafnis && !mpm.isMegarwnH64 && !mpm.isMegarwnL64 && !mpm.isMegarwnL65 && !mpm.isMegarwnH65)
             {
-                if (grid[k][0] == grid[121][0] && grid[k][1] == grid[121][1] && grid[k][5] != grid[121][5])
+                if (grid[k][0] == grid[135][0] && grid[k][1] == grid[135][1] && grid[k][5] != grid[135][5])
                 {
                     for (int i = 0; i < inputValueDistanceHole.Length; i++)
                     {
-                        inputValueDistanceHole[i].text = grid[121 + i][5];
+                        inputValueDistanceHole[i].text = grid[135 + i][5];
                     }
+                    Debug.Log("folder: "+ grid[135][5]);
                 }
-                if (grid[k][0] == grid[128][0] && grid[k][1] == grid[128][1] && grid[k][5] != grid[128][5])
+                if (grid[k][0] == grid[121][0] && grid[k][1] == grid[121][1] && grid[k][5] != grid[121][5])
                 {
                     for (int i = 0; i < distanceInputs.Length - 6; i++)
                     {
-                        distanceInputs[i].text = grid[128 + i][5];
+                        distanceInputs[i].text = grid[121 + i][5];
                     }
                 }
-                if (grid[k][0] == grid[133][0] && grid[k][1] == grid[133][1] && grid[k][5] != grid[133][5])
+                if (grid[k][0] == grid[126][0] && grid[k][1] == grid[126][1] && grid[k][5] != grid[126][5])
                 {
                     for (int i = 0; i < distanceInputs.Length - 6; i++)
                     {
-                        distanceInputs[i + 6].text = grid[133 + i][5];
+                        distanceInputs[i + 6].text = grid[126 + i][5];
                     }
                 }
                 if(grid[k][0] == grid[85][0] && grid[k][1] == grid[85][1] && grid[k][5] != grid[85][5])
@@ -1553,8 +1554,8 @@ public class WindManager : MonoBehaviour
         txtMouthpieceValueParent.gameObject.SetActive(false);
 
         pnlChooseType.SetActive(true);
-       
 
+        
         foreach (TMP_InputField tMP_ in inputValueDiameterHole) { tMP_.gameObject.SetActive(true); tMP_.text = "Διάμετρος"; }
         foreach (TMP_InputField tMP_1 in inputValueDistanceHole) { tMP_1.gameObject.SetActive(true); tMP_1.text = "Απόσταση"; }
         mpm.imgDafnis.SetActive(false);
